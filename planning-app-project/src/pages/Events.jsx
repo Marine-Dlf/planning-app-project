@@ -1,9 +1,13 @@
 import React from 'react'
+import Header from '../components/Header'
+import Navigation from '../components/Navigation'
 
 function Events() {
   return (
     <div>
-      <h1>Evènements</h1>
+        <Header />
+        <Navigation />
+        <h1>Evènements</h1>
     </div>
   )
 }

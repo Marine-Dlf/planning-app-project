@@ -1,0 +1,52 @@
+.navigation {
+    ul {
+        display: flex;
+        font-weight: bold;
+        margin: 30px;
+
+        a {
+            text-decoration: none;
+            padding: 12px;
+
+            li {
+                color: #E00B6C;
+                list-style: none;
+                transition: 0.2s;
+                cursor: pointer;
+                
+                &:hover {
+                    color: rgb(44, 44, 96);
+                }
+            }
+        }
+
+        .nav-active {
+            position: relative;
+
+            &::after {
+                content: "";
+                height: 3px;
+                width: 0;
+                background: #E00B6C;
+                position: absolute;
+                border-radius: 10px;
+                bottom: 0px;
+                left: 50%;
+                transform: translateX(-50%);
+                -webkit-animation: anim 0.3s ease forwards;
+                animation: anim 0.6s ease forwards;
+        
+                @-webkit-keyframes anim {
+                    to {
+                    width: 100%;
+                    }
+                }
+                @keyframes anim {
+                    to {
+                    width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

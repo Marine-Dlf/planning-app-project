@@ -5,6 +5,7 @@ import Planning from "./pages/Planning";
 import Events from "./pages/Events";
 import Connexion from "./pages/Connexion";
 import Regristration from "./pages/Regristration";
+import './styles/app.scss'
 
 function App() {
   return (
