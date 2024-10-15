@@ -13,9 +13,11 @@ function ChangeDate() {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
 
+
     // Move to the precious or next year
     const nextYear = () => (setCurrentYear(currentYear + 1));
     const previousYear = () => (setCurrentYear(currentYear - 1));
+
 
     // Move to the precious or next month
     const nextMonth = () => {
@@ -36,6 +38,15 @@ function ChangeDate() {
         }
     }
 
+
+    // Diplay months
+    let nextMonthName
+    currentMonth === 11 ? nextMonthName = monthName[0] : nextMonthName = monthName[currentMonth + 1]
+
+    let previousMonthName
+    currentMonth === 0 ? previousMonthName = monthName[11] : previousMonthName = monthName[currentMonth - 1]
+
+
     return (
         <div className='changeDate'>
             <div className='changeYear'>
@@ -44,9 +55,9 @@ function ChangeDate() {
                 <button className='changeYearButton' onClick={nextYear}>›</button>
             </div>
             <div className='changeMonth'>
-                <button className='changeMonthButton' onClick={previousMonth}>‹ Précédent</button>
+                <button className='changeMonthButton' onClick={previousMonth}>‹ {previousMonthName}</button>
                 <button>{monthName[currentMonth]}</button>
-                <button className='changeMonthButton' onClick={nextMonth}>Suivant ›</button>
+                <button className='changeMonthButton' onClick={nextMonth}>{nextMonthName} ›</button>
             </div>
         </div>
     )
