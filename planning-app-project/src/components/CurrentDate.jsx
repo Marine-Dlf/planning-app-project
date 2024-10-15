@@ -2,17 +2,22 @@ import React from 'react'
 import '../styles/components/currentDate.scss';
 
 
-let date = new Date()
 
-let today = date.toLocaleDateString('fr-FR')
+let todaysDate = new Date().toLocaleDateString('fr-FR')
 
 
-function CurrentDate() {
+function CurrentDate({ today, setTodayDate, setCurrentMonth, setCurrentYear}) {
+
+  const goToToday = () => {
+    setTodayDate(today)
+    setCurrentMonth(today.getMonth())
+    setCurrentYear(today.getFullYear())
+  }
 
   return (
     <div className='currentDate'>
-      <p>Date du jour : {today}</p>
-      <button>Retour au mois en cours</button>
+      <p>Date du jour : {todaysDate}</p>
+      <button onClick={goToToday}>Retour au mois en cours</button>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+// import { useState } from 'react'
 import '../styles/components/changeDate.scss'
 
 
@@ -7,11 +7,11 @@ const monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juill
 
 
 
-function ChangeDate() {
+function ChangeDate({currentMonth, setCurrentMonth, currentYear, setCurrentYear}) {
 
     // const today = new Date()
-    const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
+    // const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+    // const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
 
 
     // Move to the precious or next year
