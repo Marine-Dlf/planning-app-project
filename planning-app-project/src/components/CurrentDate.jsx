@@ -8,6 +8,7 @@ let today = date.toLocaleDateString('fr-FR')
 
 
 function CurrentDate() {
+
   return (
     <div className='currentDate'>
       <p>Date du jour : {today}</p>

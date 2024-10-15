@@ -1,0 +1,82 @@
+.changeDate {
+    margin-left: 1%;
+    margin-right: 1%;
+
+    .changeYear {
+        display: flex;
+        flex: row wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+        background-color: pink;
+        margin-bottom: 0;
+        padding-top: 0.5rem;
+    
+        button {
+            background-color: pink;
+            border: solid pink;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: rgb(44, 44, 96);
+            transition: transform 0.1s ease;
+    
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        .changeYearButton {
+            background-color: pink;
+            border: solid pink;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: rgb(44, 44, 96);
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            transition: transform 0.1s ease;
+
+            &:hover {
+                transform: scale(1.5);
+            }
+        }
+    }
+
+    .changeMonth {
+        display: flex;
+        flex: row wrap;
+        justify-content: space-around;
+        align-items: center;
+        background-color: pink;
+        padding: 0.7rem;
+
+        button {
+            font-weight: bold;
+            color: rgb(44, 44, 96);
+            background-color: pink;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        .changeMonthButton {
+            cursor: pointer;
+            color: rgb(44, 44, 96);
+            width: 9rem;
+            background-color: pink;
+            border: solid pink;
+            font-weight: bold;
+            transition: transform 0.1s ease;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+    }
+}
+
