@@ -1,0 +1,13 @@
+.weekDays {
+    margin-left: 1%;
+    margin-right: 1%;
+    color: white;
+    background-color: rgb(44, 44, 96);
+    display: flex;
+    flex: column wrap;
+    justify-content: space-around;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    font-weight: bold;
+    border-radius: 0px 0px 5px 5px;
+  }

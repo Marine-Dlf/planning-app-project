@@ -1,0 +1,5 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 colonnes pour les 7 jours de la semaine */
+
+}
