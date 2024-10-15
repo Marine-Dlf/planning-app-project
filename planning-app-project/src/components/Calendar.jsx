@@ -15,11 +15,8 @@ function Calendar() {
     <div>
       <CurrentDate 
         today = {today}
-        todayDate = {todayDate}
         setTodayDate = {setTodayDate}
-        currentMonth = {currentMonth}
         setCurrentMonth = {setCurrentMonth}
-        currentYear = {currentYear}
         setCurrentYear = {setCurrentYear}
       />
       <ChangeDate 
