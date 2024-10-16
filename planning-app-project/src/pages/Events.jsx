@@ -1,13 +1,16 @@
 import React from 'react'
 import Header from '../components/Header'
 import Navigation from '../components/Navigation'
+import '../styles/events.scss'
 
 function Events() {
   return (
     <div>
         <Header />
         <Navigation />
-        <h1>Evènements</h1>
+        <div className='events'>
+          <h1>Evènements</h1>
+        </div>
     </div>
   )
 }
