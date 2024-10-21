@@ -50,7 +50,7 @@ function ChangeDate({currentMonth, setCurrentMonth, currentYear, setCurrentYear}
             </div>
             <div className='changeMonth'>
                 <button className='changeMonthButton' onClick={previousMonth}>‹ {previousMonthName}</button>
-                <button>{monthName[currentMonth]}</button>
+                <button className='currentMonthButton'>{monthName[currentMonth]}</button>
                 <button className='changeMonthButton' onClick={nextMonth}>{nextMonthName} ›</button>
             </div>
         </div>
