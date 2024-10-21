@@ -40,7 +40,7 @@ function Grid({ currentMonth, currentYear }) {
 
 
   // Parcours du tableau
-  const browseGrid = () => grid.map((day, index) => <div key={index} className='day'>{day}</div>)
+  const browseGrid = () => grid.map((day, index) => <div key={index} className={'day' + (day == "" ? " emptyCase" : "")}>{day}</div>)
 
   
   return (
