@@ -26,7 +26,12 @@ function Calendar() {
         setCurrentYear = {setCurrentYear}
       />
       <WeekDays />
-      <Grid />
+      <Grid 
+        currentMonth = {currentMonth}
+        setCurrentMonth = {setCurrentMonth}
+        currentYear = {currentYear}
+        setCurrentYear = {setCurrentYear}
+      />
     </div>
   )
 }
