@@ -1,0 +1,67 @@
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.connexion {
+    padding-top: 2rem;
+    border: solid;
+    border-radius: 10px;
+    text-align: center;
+    width: 25%; /* Garde la largeur à 25% */
+    color: rgb(44, 44, 96);
+    font-weight: bold;
+    box-shadow: 1px 1px 5px rgb(44, 44, 96);
+    max-width: 500px; /* Limite la taille maximale pour les grands écrans */
+    min-width: 280px; /* Empêche la div de devenir trop petite */
+
+    form {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        margin: 2rem;
+
+        label, input {
+            margin: 1rem auto;
+            width: 100%; /* Inputs prennent 100% de la largeur du form */
+            max-width: 100%; /* Évite les débordements */
+            height: 1.5rem;
+        }
+    }
+
+    button {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        padding: 0.7rem 1.5rem; /* Padding pour le bouton */
+        font-weight: bold;
+        cursor: pointer;
+        color: white;
+        background-color: rgb(44, 44, 96);
+        border-radius: 10px;
+        border: solid rgb(44, 44, 96);
+        transition: background-color 0.3s, border 0.3s;
+        width: 60%; /* Le bouton prend la même largeur que les inputs */
+        max-width: 100%; /* Évite que le bouton dépasse les limites du conteneur */
+        box-sizing: border-box; /* Inclut padding et border dans le calcul de la largeur */
+
+        &:hover {
+            background-color: rgb(28, 28, 66);
+            border: solid rgb(28, 28, 66);
+        }
+    }
+}
+
+/* Media Queries pour petits écrans */
+@media (max-width: 768px) {
+    .connexion {
+        width: 80%; /* Ajuste la largeur de la div à 80% sur des écrans moyens */
+    }
+}
+
+@media (max-width: 480px) {
+    .connexion {
+        width: 90%; /* Ajuste la largeur de la div à 90% sur des petits écrans */
+    }
+}
