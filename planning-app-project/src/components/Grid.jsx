@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-// import Popup from './Popup'
+import Popup from './Popup'
 import '../styles/components/grid.scss'
 import Day from './Day';
 
@@ -8,6 +8,9 @@ import Day from './Day';
 function Grid({ currentMonth, currentYear }) {
 
   const [grid, setGrid] = useState([]);      // Génère un tableau des jours du mois
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(null);
+
 
   const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate()
 
@@ -39,11 +42,27 @@ function Grid({ currentMonth, currentYear }) {
   }, [currentYear, currentMonth])   // [currentYear, currentMonth], indique que cet effet doit se ré-exécuter à chaque fois que currentYear ou currentMonth change
 
 
+  // Affichage de la popup
+  const displayPopup = (day) => {
+    if (day !== "") {
+      setSelectedDay(day)     // Garde une trace du jour sélectionné
+      setIsPopupOpen(true)    // Ouvre la popup
+    }
+  }
+
+  // Fermeture de la popup
+  const closePopup = () => {
+    setIsPopupOpen(false)
+    setSelectedDay(null)    // Réinitialiser le jour sélectionné si nécessaire
+  }
+
+
   // Parcours du tableau
   const browseGrid = () => grid.map((day, index) => (
     <Day
       key={index}
-      day={day}
+      day={day}     // Passe le jour ou la case vide au composant Day
+      onClick={day ? () => displayPopup(day) : undefined}     // Passe l'action de clic au composant Day
     />
   ))
 
@@ -51,6 +70,15 @@ function Grid({ currentMonth, currentYear }) {
   return (
     <div className='grid'>
       {browseGrid()}
+
+      {isPopupOpen && (
+        <Popup
+          day={selectedDay}             // On peut passer le jour sélectionné si nécessaire
+          onClose={closePopup}          // Passe la fonction pour fermer la popup
+          currentMonth={currentMonth}   // Passe le mois actuel
+          currentYear={currentYear}     // Passe l'année actuelle
+        />
+      )}
     </div>
   )
 }
