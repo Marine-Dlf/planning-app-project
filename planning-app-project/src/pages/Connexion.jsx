@@ -1,11 +1,12 @@
 import React from 'react'
-import '../styles/connexion.scss'
+import '../styles/connexionRegistration.scss'
+import { NavLink } from 'react-router-dom'
 
 
 function Connexion() {
   return (
     <div className='parent'>
-      <div className='connexion'>
+      <div className='connexionRegistration'>
         <h1>Connexion</h1>
         <form>
           <label>Pseudo</label>
@@ -15,6 +16,7 @@ function Connexion() {
           <label>Mot de Passe</label>
           <input type='text'/>
           <button type='submit'>Connexion</button>
+          <NavLink to='/registration' className='changePage'>S'inscrire ? Par ici !</NavLink>
         </form>
       </div>
     </div>
