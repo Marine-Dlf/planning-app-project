@@ -1,3 +1,9 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; // S'assure que le body prend tout l'espace disponible
+}
+
 .parent {
     display: flex;
     justify-content: center;

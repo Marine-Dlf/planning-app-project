@@ -1,9 +1,11 @@
 import React from 'react'
 
-function Day() {
+function Day({day}) {
   return (
-    <div>
-      
+    <div
+      className={'day' + (day == "" ? " emptyCase" : "")}
+    >
+      {day !== "" ? day : ""}
     </div>
   )
 }

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
+// import Popup from './Popup'
 import '../styles/components/grid.scss'
+import Day from './Day';
 
 
 
 function Grid({ currentMonth, currentYear }) {
 
-  const [grid, setGrid] = useState([])      // Génère un tableau des jours du mois
+  const [grid, setGrid] = useState([]);      // Génère un tableau des jours du mois
 
   const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate()
 
   const getFirstDayInMonth = (year, month) => {
     let today = new Date(year, month, 1).getDay()
-    let goodDay
-    today === 0 ? goodDay = 6 : goodDay = today -1
-    return goodDay
+    return today === 0 ? 6 : today - 1
   }
 
 
@@ -40,7 +40,12 @@ function Grid({ currentMonth, currentYear }) {
 
 
   // Parcours du tableau
-  const browseGrid = () => grid.map((day, index) => <div key={index} className={'day' + (day == "" ? " emptyCase" : "")}>{day}</div>)
+  const browseGrid = () => grid.map((day, index) => (
+    <Day
+      key={index}
+      day={day}
+    />
+  ))
 
   
   return (
