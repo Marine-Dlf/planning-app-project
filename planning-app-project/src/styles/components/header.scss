@@ -10,4 +10,14 @@
         color: #ffffff;
         font-weight: bold;
     }
+
+    .disconnect {
+        text-align: right;
+        margin-right: 2rem;
+        cursor: pointer;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
 }
