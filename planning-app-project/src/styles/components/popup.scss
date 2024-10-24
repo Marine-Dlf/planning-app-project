@@ -33,6 +33,10 @@
             border: none;
             background-color: white;
             cursor: pointer;
+
+            &:hover {
+                color: #cb0b61;
+            }
         }
     }
 
