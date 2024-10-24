@@ -17,8 +17,71 @@
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    width: 300px;
+    width: 400px;
     max-width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
+
+    .closeButtonDiv {
+        display: flex;
+        justify-content: right;
+
+        .closeButton {
+            border: none;
+            background-color: white;
+            cursor: pointer;
+        }
+    }
+
+    .todaysDate {
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .popupContent {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+
+    .formStep {
+        display: flex;
+        flex-direction: column;
+        padding-top: 1rem;
+    }
+
+    .addButton {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+
+        button {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            padding: 5px 7px;
+            color: rgb(44, 44, 96);
+            font-weight: bold;
+            font-size: 1rem;
+            border: none;
+            box-shadow: 2px 2px 2px rgb(44, 44, 96);
+            border-radius: 5px;
+            background-color: rgb(252, 239, 241);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: scale(1.05);
+                background-color: pink;
+            }
+            &:active {
+                color: #E00B6C;
+            }
+        }
+
+    }
 }
