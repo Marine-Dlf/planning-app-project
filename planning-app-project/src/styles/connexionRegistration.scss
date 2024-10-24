@@ -83,6 +83,10 @@ html, body {
         &:hover {
             text-decoration: underline;
         }
+
+        &:active {
+            color: #E00B6C;
+        }
     }
 }
 

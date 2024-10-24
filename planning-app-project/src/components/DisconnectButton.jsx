@@ -1,9 +1,10 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 function DisconnectButton() {
   return (
     <div className='disconnect'>
-      Se déconnecter
+      <NavLink to='/connexion'>Se déconnecter</NavLink>
     </div>
   )
 }

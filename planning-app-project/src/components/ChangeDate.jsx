@@ -6,7 +6,7 @@ const monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juill
 
 
 
-function ChangeDate({currentMonth, setCurrentMonth, currentYear, setCurrentYear}) {
+function ChangeDate({ currentMonth, setCurrentMonth, currentYear, setCurrentYear, displayPopup }) {
 
     // Move to the precious or next year
     const nextYear = () => (setCurrentYear(currentYear + 1));
@@ -45,12 +45,12 @@ function ChangeDate({currentMonth, setCurrentMonth, currentYear, setCurrentYear}
         <div className='changeDate'>
             <div className='changeYear'>
                 <button className='changeYearButton' onClick={previousYear}>‹</button>
-                <button>{currentYear}</button>
+                <button onClick={() => displayPopup('year')}>{currentYear}</button>
                 <button className='changeYearButton' onClick={nextYear}>›</button>
             </div>
             <div className='changeMonth'>
                 <button className='changeMonthButton' onClick={previousMonth}>‹ {previousMonthName}</button>
-                <button className='currentMonthButton'>{monthName[currentMonth]}</button>
+                <button className='currentMonthButton' onClick={() => displayPopup('month')}>{monthName[currentMonth]}</button>
                 <button className='changeMonthButton' onClick={nextMonth}>{nextMonthName} ›</button>
             </div>
         </div>
