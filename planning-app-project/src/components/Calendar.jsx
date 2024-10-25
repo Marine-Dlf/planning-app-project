@@ -63,7 +63,7 @@ function Calendar() {
         <Popup
           type={popupType}              // Passe le type de la popup
           day={selectedDay}             // On peut passer le jour sélectionné si nécessaire
-          onClose={closePopup}          // Passe la fonction pour fermer la popup
+          closePopup={closePopup}       // Passe la fonction pour fermer la popup
           currentMonth={currentMonth}   // Passe le mois actuel
           currentYear={currentYear}     // Passe l'année actuelle
           setCurrentYear={setCurrentYear}
