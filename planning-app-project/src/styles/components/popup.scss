@@ -95,4 +95,34 @@
         }
 
     }
+
+}
+
+.yearsList {
+    display: flex;
+    flex-direction: column;
+
+    button {
+        margin: 5px;
+        cursor: pointer;
+        background-color: white;
+        border: none;
+        color: rgb(44, 44, 96);
+        font-size: 1.1rem;
+        transition: transform 0.1s ease;
+
+        &:hover {
+            transform: scale(1.1);
+            font-weight: bold;
+        }
+
+        &:active {
+            color: #E00B6C;
+        }
+
+    }
+    .currentYearButton {
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
 }

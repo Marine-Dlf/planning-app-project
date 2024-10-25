@@ -23,15 +23,27 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, onClose }
     } else if (type === 'month') {
         content = <p>- Affichage du mois en cours: {monthName[currentMonth]}<br/>et des 11 autres mois<br/>- Format: un rectangle de 3 mois en largeur et 4 en hauteur</p>
     } else if (type === 'year') {
-        content = <div>
+        content = <div className='yearsList'>
             <button onClick={() => {
                 setCurrentYear(currentYear - 2)
                 onClose()
             }}>{currentYear - 2}</button>
-            <p>{currentYear - 1}</p>
-            <p>{currentYear}</p>
-            <p>{currentYear + 1}</p>
-            <p>{currentYear + 2}</p>
+            <button onClick={() => {
+                setCurrentYear(currentYear - 1)
+                onClose()
+            }}>{currentYear - 1}</button>
+            <button className='currentYearButton' onClick={() => {
+                setCurrentYear(currentYear)
+                onClose()
+            }}>{currentYear}</button>
+            <button onClick={() => {
+                setCurrentYear(currentYear + 1)
+                onClose()
+            }}>{currentYear + 1}</button>
+            <button onClick={() => {
+                setCurrentYear(currentYear + 2)
+                onClose()
+            }}>{currentYear + 2}</button>
         </div>
     }
 
