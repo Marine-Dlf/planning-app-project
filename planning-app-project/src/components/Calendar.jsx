@@ -66,6 +66,7 @@ function Calendar() {
           onClose={closePopup}          // Passe la fonction pour fermer la popup
           currentMonth={currentMonth}   // Passe le mois actuel
           currentYear={currentYear}     // Passe l'année actuelle
+          setCurrentYear={setCurrentYear}
         />
       )}
     </div>

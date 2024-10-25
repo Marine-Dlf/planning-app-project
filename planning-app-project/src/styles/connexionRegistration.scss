@@ -74,6 +74,10 @@ html, body {
             border: solid rgb(62, 62, 108);
             transform: scale(1.05);
         }
+
+        &:active {
+            color: pink;
+        }
     }
 
     .changePage {

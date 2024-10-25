@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/components/popup.scss'
 import Form from './Form';
 
-function Popup({ type, day, currentMonth, currentYear, onClose }) {
+function Popup({ type, day, currentMonth, currentYear, setCurrentYear, onClose }) {
 
     const monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
@@ -23,7 +23,16 @@ function Popup({ type, day, currentMonth, currentYear, onClose }) {
     } else if (type === 'month') {
         content = <p>- Affichage du mois en cours: {monthName[currentMonth]}<br/>et des 11 autres mois<br/>- Format: un rectangle de 3 mois en largeur et 4 en hauteur</p>
     } else if (type === 'year') {
-        content = <p>Affichage de la liste déroulante des années<br/>(avec l'année sélectionnée ({currentYear}) au centre)</p>
+        content = <div>
+            <button onClick={() => {
+                setCurrentYear(currentYear - 2)
+                onClose()
+            }}>{currentYear - 2}</button>
+            <p>{currentYear - 1}</p>
+            <p>{currentYear}</p>
+            <p>{currentYear + 1}</p>
+            <p>{currentYear + 2}</p>
+        </div>
     }
 
 
