@@ -1,15 +1,26 @@
 import React, { useState } from 'react'
 import '../styles/components/popup.scss'
 
+
+
 const EMPTY_EVENT = {
     eventName: '',
     time: '',
     location: '',
     comment: ''
 }
+
+
+
 function Form({ closePopup }) {
 
     const [formData, setFormData] = useState(EMPTY_EVENT);
+
+    const formfields = [
+        { label: "Evènement", type: "text", name: "eventName"},
+        { label: "Horaire", type: "time", name: "time"},
+        { label: "Lieu", type: "text", name: "location"},
+    ]
 
 
     // Fonction qui détecte un changement
@@ -37,25 +48,29 @@ function Form({ closePopup }) {
   return (
     <div>
       <form className='form' onSubmit={handleSubmit}>
+
         <div className='formStep'>
-            <label>Evènement</label>
-            <input type='text' name='eventName' value={formData.eventName} onChange={handleChange}/>
+            {formfields.map((field) => (
+                <div key={field.name} className='formStep'>
+                    <label>{field.label}</label>
+                    <input
+                        type={field.type}
+                        name={field.name}
+                        value={formData[field.name]}
+                        onChange={handleChange} />
+                </div>
+            ))}
         </div>
-        <div className='formStep'>
-            <label>Horaire</label>
-            <input type='time' name='time' value={formData.time} onChange={handleChange}/>
-        </div>
-        <div className='formStep'>
-            <label>Lieu</label>
-            <input type='text' name='location' value={formData.location} onChange={handleChange}/>
-        </div>
+
         <div className='formStep'>
             <label>Commentaire</label>
             <textarea name='comment' value={formData.comment} onChange={handleChange}/>
         </div>
+        
         <div className='addButton'>
             <button type='submit'>Enregistrer</button>
         </div>
+
       </form>
     </div>
   )
