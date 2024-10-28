@@ -39,7 +39,7 @@ function Form({ closePopup }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
-        alert(formData.eventName + "\n" + formData.time)
+        alert(formData.eventName + "\n" + formData.time + "\n" + formData.location + "\n" + formData.comment)
 
         closePopup()
     }
@@ -66,7 +66,7 @@ function Form({ closePopup }) {
             <label>Commentaire</label>
             <textarea name='comment' value={formData.comment} onChange={handleChange}/>
         </div>
-        
+
         <div className='addButton'>
             <button type='submit'>Enregistrer</button>
         </div>
