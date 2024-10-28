@@ -3,7 +3,6 @@ import '../styles/components/grid.scss'
 import Day from './Day';
 
 
-
 function Grid({ currentMonth, currentYear, displayPopup }) {
 
   const [grid, setGrid] = useState([]);      // Génère un tableau des jours du mois
@@ -42,9 +41,9 @@ function Grid({ currentMonth, currentYear, displayPopup }) {
   // Parcours du tableau
   const browseGrid = () => grid.map((day, index) => (
     <Day
-      key={index}
-      day={day}     // Passe le jour ou la case vide au composant Day
-      onClick={day ? () => displayPopup('day', day) : undefined}     // Passe l'action de clic au composant Day
+      key = {index}
+      day = {day}     // Passe le jour ou la case vide au composant Day
+      onClick = {day ? () => displayPopup('day', day) : undefined}     // Passe l'action de clic au composant Day
     />
   ))
 

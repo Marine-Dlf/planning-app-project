@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import '../styles/components/popup.scss'
 
-
+const EMPTY_EVENT = {
+    eventName: '',
+    time: '',
+    location: '',
+    comment: ''
+}
 function Form({ closePopup }) {
 
-    const [formData, setFormData] = useState({
-        eventName: '',
-        time: '',
-        location: '',
-        comment: ''
-    });
+    const [formData, setFormData] = useState(EMPTY_EVENT);
+
 
     // Fonction qui détecte un changement
     const handleChange = (e) => {
@@ -27,6 +28,7 @@ function Form({ closePopup }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
+        alert(formData.eventName + "\n" + formData.time)
 
         closePopup()
     }

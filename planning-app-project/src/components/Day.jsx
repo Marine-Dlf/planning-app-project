@@ -1,13 +1,12 @@
 import React from 'react'
-import Popup from './Popup'
 
 function Day({ day, onClick }) {
   return (
     <div
-      className={'day' + (day == "" ? " emptyCase" : "")}
+      className={'day' + (day === "" ? " emptyCase" : "")}
       onClick={onClick}
     >
-      {day !== "" ? day : ""}
+    {day !== "" ? day : ""}
     </div>
   )
 }

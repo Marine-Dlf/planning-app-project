@@ -25,8 +25,10 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
             <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
             <Form closePopup= {closePopup}/>
         </div>
+
     } else if (type === 'month') {
         content = <p>- Affichage du mois en cours: {monthName[currentMonth]}<br/>et des 11 autres mois<br/>- Format: un rectangle de 3 mois en largeur et 4 en hauteur</p>
+    
     } else if (type === 'year') {
         content = <div className='yearsList'>
             <button onClick={() => handleYearClick(currentYear - 2)}>{currentYear - 2}</button>
