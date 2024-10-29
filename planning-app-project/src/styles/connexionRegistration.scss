@@ -9,25 +9,32 @@ html, body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    // background: repeating-conic-gradient(
+    //     rgb(44, 44, 96) 0%,
+    //     rgb(87, 87, 145) 15%,
+    //     rgb(44, 44, 96) 33%
+    // );
     background: repeating-conic-gradient(
-        rgb(44, 44, 96) 0%,
-        rgb(87, 87, 145) 15%,
-        rgb(44, 44, 96) 33%
+        #9A2374 0%,
+        #ae7292 15%,
+        #9A2374 33%
     );
 }
 
 .connexionRegistration {
     padding-top: 2rem;
-    border: solid;
+    border: solid #9A2374;
     border-radius: 10px;
     text-align: center;
     width: 25%; /* Garde la largeur à 25% */
     color: rgb(44, 44, 96);
     font-weight: bold;
-    box-shadow: 3px 3px 5px rgb(44, 44, 96);
+    // box-shadow: 3px 3px 5px rgb(44, 44, 96);
+    box-shadow: 10px 10px 10px #9A2374;
     max-width: 500px; /* Limite la taille maximale pour les grands écrans */
     min-width: 280px; /* Empêche la div de devenir trop petite */
-    background-color: rgb(239, 239, 250);
+    // background-color: rgb(239, 239, 250);
+    background-color: rgb(249, 239, 250);
 
     form {
         display: flex;
