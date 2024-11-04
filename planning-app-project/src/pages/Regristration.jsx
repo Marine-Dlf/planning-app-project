@@ -1,26 +1,24 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import LoginForm from '../components/LoginForm';
 import '../styles/connexionRegistration.scss'
 
 
 function Registration() {
+
+  const handleRegistration = (formData) => {
+    // Utilisez formData pour traiter l'inscription
+    console.log('Données d\'inscription:', formData);
+  };
+
   return (
-    <div className='parent'>
-      <div className='connexionRegistration'>
-        <h1>Inscription</h1>
-        <form>
-          <label>Choisis un pseudo</label>
-          <input type='text'/>
-          <label>E-mail</label>
-          <input type='text'/>
-          <label>Crée ton mot de passe</label>
-          <input type='text'/>
-          <button type='submit'>Insciption</button>
-          <NavLink to='/connexion' className='changePage'>Déjà un compte ? Se connecter</NavLink>
-        </form>
-      </div>
-    </div>
-  )
+    <LoginForm
+      title='Inscription'
+      buttonText='Inscription'
+      changeText="Déjà un compte ? Se connecter"
+      changeLink='/connexion'
+      onSubmit={handleRegistration}
+    />
+  );
 }
 
 export default Registration

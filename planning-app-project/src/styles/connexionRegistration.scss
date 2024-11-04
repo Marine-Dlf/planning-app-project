@@ -15,9 +15,9 @@ html, body {
     //     rgb(44, 44, 96) 33%
     // );
     background: repeating-conic-gradient(
-        #9A2374 0%,
-        #ae7292 15%,
-        #9A2374 33%
+        #ad789c 0%,
+        #f2d3e3 15%,
+        #ad789c calc(100%/3)
     );
 }
 
