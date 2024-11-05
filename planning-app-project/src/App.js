@@ -6,10 +6,19 @@ import Events from "./pages/Events";
 import Connexion from "./pages/Connexion";
 import Regristration from "./pages/Regristration";
 import './styles/app.scss'
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 function App() {
   return (
     <>
+            <header>
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+    </header>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
