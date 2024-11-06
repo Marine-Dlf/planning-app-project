@@ -9,18 +9,21 @@ function Day({ day, onClick, events }) {
     
     {day !== '' ? (
         <>
-          <p>{day}</p>
+          <p className='number'>{day}</p>
           {events.map((event, index) => {
             // Formatage de l'heure `schedules` pour exclure les secondes
-            const formattedTime = new Date(`1970-01-01T${event.schedules}`).toLocaleTimeString('en-GB', {
+            let formattedTime
+            if (event.schedules !== null) {
+            formattedTime = new Date(`1970-01-01T${event.schedules}`).toLocaleTimeString('en-GB', {
               hour: '2-digit',
               minute: '2-digit',
             })
+          }
             return (
               <div key={index} className='event'>
                 {event.name}<br/> {/* Affichez le nom de l'événement ou d'autres détails */}
-                {formattedTime}<br/>
-                {event.location}
+                {event.location ? <div className='infos'>{formattedTime} - {event.location}</div> : <div className='infos'>{formattedTime}</div>}
+                {/* à modifier {formattedTime ? <div className='infos'>{formattedTime} - {event.location}</div> : <div className='infos'>{event.location}</div>} */}
               </div>
             )
           })}

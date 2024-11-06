@@ -13,8 +13,9 @@
     padding: 5px;
     min-height: 60px;
     display: flex;
-    align-items: baseline;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
     background-color: #f9f9f9;
     color: rgb(44, 44, 96);
     font-weight: 500;
@@ -28,4 +29,19 @@
 .day.emptyCase {
     background-color: rgb(241, 239, 239);
     cursor: auto;
+}
+
+.event {
+    font-weight: bold;
+    color: rgb(56, 56, 121);
+
+    .infos {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+}
+
+.number {
+    margin-bottom: 0.3rem;
+    margin-top: 0.3rem;
 }
