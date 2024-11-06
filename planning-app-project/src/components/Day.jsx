@@ -10,16 +10,24 @@ function Day({ day, onClick, events }) {
     {day !== '' ? (
         <>
           <p>{day}</p>
-          {events.map((event, index) => (
-            <div key={index} className='event'>
-              {event.name} {/* Affichez le nom de l'événement ou d'autres détails */}
-            </div>
-          ))}
+          {events.map((event, index) => {
+            // Formatage de l'heure `schedules` pour exclure les secondes
+            const formattedTime = new Date(`1970-01-01T${event.schedules}`).toLocaleTimeString('en-GB', {
+              hour: '2-digit',
+              minute: '2-digit',
+            })
+            return (
+              <div key={index} className='event'>
+                {event.name}<br/> {/* Affichez le nom de l'événement ou d'autres détails */}
+                {formattedTime}<br/>
+                {event.location}
+              </div>
+            )
+          })}
         </>
       ) : (
         ''
       )}
-      
     </div>
   )
 }
