@@ -21,9 +21,19 @@ function Day({ day, onClick, events }) {
           }
             return (
               <div key={index} className='event'>
-                {event.name}<br/> {/* Affichez le nom de l'événement ou d'autres détails */}
-                {event.location ? <div className='infos'>{formattedTime} - {event.location}</div> : <div className='infos'>{formattedTime}</div>}
-                {/* à modifier {formattedTime ? <div className='infos'>{formattedTime} - {event.location}</div> : <div className='infos'>{event.location}</div>} */}
+
+                {event.name}<br/>
+
+                <div className="infos">
+                {event.location && formattedTime              // Affichage conditionnel de event.location et formattedTime
+                  ? `${formattedTime} - ${event.location}`
+                  : event.location == null
+                  ? formattedTime
+                  : formattedTime == null
+                  ? event.location
+                  : null}
+                </div>
+
               </div>
             )
           })}
