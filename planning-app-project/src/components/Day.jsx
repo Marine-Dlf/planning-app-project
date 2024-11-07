@@ -11,10 +11,10 @@ function Day({ day, onClick, events }) {
         <>
           <p className='number'>{day}</p>
           {events.map((event, index) => {
-            // Formatage de l'heure `schedules` pour exclure les secondes
+            // Formatage de l'heure `time` pour exclure les secondes
             let formattedTime
-            if (event.schedules !== null) {
-            formattedTime = new Date(`1970-01-01T${event.schedules}`).toLocaleTimeString('en-GB', {
+            if (event.time !== null) {
+            formattedTime = new Date(`1970-01-01T${event.time}`).toLocaleTimeString('en-GB', {
               hour: '2-digit',
               minute: '2-digit',
             })
@@ -22,16 +22,13 @@ function Day({ day, onClick, events }) {
             return (
               <div key={index} className='event'>
 
-                {event.name}<br/>
+                {event.eventName}<br/>
 
+                {/* Affichage conditionnel de event.location et formattedTime */}
                 <div className="infos">
-                {event.location && formattedTime              // Affichage conditionnel de event.location et formattedTime
-                  ? `${formattedTime} - ${event.location}`
-                  : event.location == null
-                  ? formattedTime
-                  : formattedTime == null
-                  ? event.location
-                  : null}
+                  {formattedTime && event.location
+                    ? `${formattedTime} - ${event.location}`
+                    : formattedTime || event.location || null}
                 </div>
 
               </div>

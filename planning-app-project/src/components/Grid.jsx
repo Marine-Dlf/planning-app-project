@@ -22,7 +22,7 @@ function Grid({ currentMonth, currentYear, displayPopup }) {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('http://localhost:5000/events/');
+        const response = await fetch('http://localhost:5000/events');
         if (!response.ok) {
           // Vérifier si la réponse est OK (status 200-299) (si ce n'est pas le cas, il lève une erreur)
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -34,7 +34,7 @@ function Grid({ currentMonth, currentYear, displayPopup }) {
       }
     }
     fetchEvents()
-}, [currentMonth, currentYear]);                    // Appel de l'API à chaque changement de mois ou d'année
+  }, [currentMonth, currentYear]);                    // Appel de l'API à chaque changement de mois ou d'année
 
 
   // Calcule et met à jour la grille des jours du mois actuel à chaque fois que l'année (currentYear) ou le mois (currentMonth) change
@@ -84,7 +84,7 @@ function Grid({ currentMonth, currentYear, displayPopup }) {
     <div className='grid'>
 
       {browseGrid()}
-      
+
     </div>
   )
 }

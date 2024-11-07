@@ -12,9 +12,22 @@ const EMPTY_EVENT = {
 
 
 
-function Form({ closePopup }) {
+function Form({ closePopup, selectedDate }) {
 
-    const [formData, setFormData] = useState(EMPTY_EVENT);
+    // // const [formData, setFormData] = useState(EMPTY_EVENT);
+
+    // Permet de stocker les dates dans un format standardisé YYYY-MM-DD, compatible avec de nombreuses bases de données et conventions API
+      const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;  // Retourne le format YYYY-MM-DD
+      };
+    
+      const [formData, setFormData] = useState({
+        ...EMPTY_EVENT,
+        date: formatDate(selectedDate),  // Format local
+      });
 
     const formfields = [
         { label: "Evènement", type: "text", name: "eventName"},
@@ -36,12 +49,30 @@ function Form({ closePopup }) {
 
 
     // Détecte la soumission du formulaire
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData)
-        alert(formData.eventName + "\n" + formData.time + "\n" + formData.location + "\n" + formData.comment)
+        try {
+            const res = await fetch('http://localhost:5000/events', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',             // Spécifie que les données sont au format JSON
+                },
+                body: JSON.stringify(formData),                     // Convertit formData en JSON pour l'envoyer au serveur
+            });
 
-        closePopup()
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            const result = await res.json();
+            console.log("Événement enregistré avec succès :", result);
+
+            // Réinitialiser le formulaire et fermer la popup
+            setFormData(EMPTY_EVENT);
+            closePopup()
+        } catch (error) {
+            console.error("Erreur lors de l'enregistrement de l'événement :", error);
+        }
+
     }
 
 
@@ -50,6 +81,15 @@ function Form({ closePopup }) {
       <form className='form' onSubmit={handleSubmit}>
 
         <div className='formStep'>
+
+            <label>Date</label>
+            <input
+                type="text"
+                name="date"
+                value={formData.date}
+                readOnly   // Affiche la date de manière non modifiable
+            />
+
             {formfields.map((field) => (
                 <div key={field.name} className='formStep'>
                     <label>{field.label}</label>
@@ -57,7 +97,8 @@ function Form({ closePopup }) {
                         type={field.type}
                         name={field.name}
                         value={formData[field.name]}
-                        onChange={handleChange} />
+                        onChange={handleChange}
+                    />
                 </div>
             ))}
         </div>

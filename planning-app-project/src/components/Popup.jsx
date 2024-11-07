@@ -23,7 +23,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
         content = <div>
             <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
-            <Form closePopup= {closePopup}/>
+            <Form closePopup= {closePopup} selectedDate={date} />
         </div>
 
     } else if (type === 'month') {
