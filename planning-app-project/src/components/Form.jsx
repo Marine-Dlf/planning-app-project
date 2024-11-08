@@ -2,14 +2,12 @@ import React, { useState } from 'react'
 import '../styles/components/popup.scss'
 
 
-
 const EMPTY_EVENT = {
     eventName: '',
     time: '',
     location: '',
     comment: ''
 }
-
 
 
 function Form({ closePopup, selectedDate }) {
@@ -52,12 +50,18 @@ function Form({ closePopup, selectedDate }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
+            // Si le champ 'time' est vide, on le met à null
+            const formDataToSend = {
+            ...formData,
+            time: formData.time === '' ? null : formData.time,
+            }
+
             const res = await fetch('http://localhost:5000/events', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',             // Spécifie que les données sont au format JSON
                 },
-                body: JSON.stringify(formData),                     // Convertit formData en JSON pour l'envoyer au serveur
+                body: JSON.stringify(formDataToSend),               // Convertit formData en JSON pour l'envoyer au serveur
             });
 
             if (!res.ok) {

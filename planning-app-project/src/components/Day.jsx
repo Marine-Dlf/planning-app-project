@@ -17,25 +17,28 @@ function Day({ day, onClick, events }) {
             formattedTime = new Date(`1970-01-01T${event.time}`).toLocaleTimeString('en-GB', {
               hour: '2-digit',
               minute: '2-digit',
-            })
-          }
-            return (
-              <div key={index} className='event'>
+              })
+            } else {
+              formattedTime = ''
+            }
 
-                {event.eventName}<br/>
+              return (
+                <div key={index} className='event'>
 
-                {/* Affichage conditionnel de event.location et formattedTime */}
-                <div className="infos">
-                  {formattedTime && event.location
-                    ? `${formattedTime} - ${event.location}`
-                    : formattedTime || event.location || null}
+                  {event.eventName}<br/>
+
+                  {/* Affichage conditionnel de event.location et formattedTime */}
+                  <div className="infos">
+                    {formattedTime && event.location
+                      ? `${formattedTime} - ${event.location}`
+                      : formattedTime || event.location || null}
+                  </div>
+
                 </div>
-
-              </div>
-            )
-          })}
-        </>
-      ) : (
+              )
+            })}
+          </>
+        ) : (
         ''
       )}
     </div>
