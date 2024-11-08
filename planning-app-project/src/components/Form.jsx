@@ -86,13 +86,15 @@ function Form({ closePopup, selectedDate }) {
 
         <div className='formStep'>
 
+            <div className='hidden'>
             <label>Date</label>
-            <input
-                type="text"
-                name="date"
-                value={formData.date}
-                readOnly   // Affiche la date de manière non modifiable
+                <input
+                    type="text"
+                    name="date"
+                    value={formData.date}
+                    readOnly   // Affiche la date de manière non modifiable
             />
+            </div>
 
             {formfields.map((field) => (
                 <div key={field.name} className='formStep'>
