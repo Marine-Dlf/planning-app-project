@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginForm from '../components/LoginForm';
-import '../styles/connexionRegistration.scss'
+import '../styles/pages/connexionRegistration.scss'
 
 
 function Connexion() {

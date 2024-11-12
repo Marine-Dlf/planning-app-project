@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import Navigation from '../components/Navigation'
-import '../styles/events.scss'
+import '../styles/pages/events.scss'
 
 function Events() {
   return (

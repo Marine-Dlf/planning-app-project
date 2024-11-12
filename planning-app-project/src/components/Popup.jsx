@@ -13,7 +13,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
     }
 
     let content;
-    
+
     if (type === 'day') {
         // const formatedDate = new Date(currentYear, currentMonth, day).toLocaleDateString('fr-FR')        // Si je préfère afficher ??/??/????
         const date = new Date(currentYear, currentMonth, day)
@@ -24,8 +24,8 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         content = <div>
             <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
             <Form closePopup= {closePopup} selectedDate={date} />
-        </div>
-
+        </div>     
+      
     } else if (type === 'month') {
         content = <p>- Affichage du mois en cours: {monthName[currentMonth]}<br/>et des 11 autres mois<br/>- Format: un rectangle de 3 mois en largeur et 4 en hauteur</p>
     
