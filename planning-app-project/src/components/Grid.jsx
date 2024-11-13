@@ -69,12 +69,14 @@ function Grid({ currentMonth, currentYear, displayPopup }) {
         new Date(event.date).getDate() === day                  // et le jour de cet événement correspondent à currentYear, currentMonth et day
     );
 
+    const popupType = dayEvents.length > 0 ? 'dayWithEvent' : 'dayWithoutEvent';    // Type de popup selon la présence ou non d'événement(s)
+
     return (
     <Day
       key = {index}
       day = {day}             // Passe le jour ou la case vide au composant Day
       events = {dayEvents}    // Passe les évènements de ce jour au composant Day
-      onClick = {day ? () => displayPopup('day', day) : undefined}     // Passe l'action de clic au composant Day
+      onClick = {day ? () => displayPopup(popupType, day) : undefined}     // Passe l'action de clic au composant Day (le type 'day' a été remplacé par popupType)
     />
     )
   })
