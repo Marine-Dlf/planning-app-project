@@ -49,6 +49,13 @@ function Form({ closePopup, selectedDate, closeForm }) {
     // Détecte la soumission du formulaire
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        // Vérifie si eventName est valdide (non vide)
+        if (formData.eventName.trim() === '') {
+            alert('Evènement obligatoire')
+            return
+        }
+
         try {
             // Si le champ 'time' est vide, on le met à null
             const formDataToSend = {
