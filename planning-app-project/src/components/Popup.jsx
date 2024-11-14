@@ -37,9 +37,13 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         content = (
             <div>
                 {isFormOpen ? (
-                    <Form closePopup={closePopup} selectedDate={new Date(currentYear, currentMonth, day)} />
+                    <>
+                        <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
+                        <Form closePopup={closePopup} selectedDate={new Date(currentYear, currentMonth, day)} />
+                    </>
                 ) : (
                     <>
+                        <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
                         <p>Les évènements normalement !</p>
                         <button onClick={openForm}>Add</button>
                     </>
