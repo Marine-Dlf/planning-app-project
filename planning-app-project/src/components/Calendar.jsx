@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import CurrentDate from './CurrentDate'
 import ChangeDate from './ChangeDate'
 import WeekDays from './WeekDays'
@@ -17,13 +17,38 @@ function Calendar() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [popupType, setPopupType] = useState(null);
 
+  const [events, setEvents] = useState([])   // État pour stocker les événements
+  const [selectedDayEvents, setSelectedDayEvents] = useState([]);   // Stocke les évènement du jour sélectionné
+
+  
+
+  // Fetch pour ensuite pouvoir afficher les données // J'ai déplacé le fetch depuis Grid à ici (Calendar) pour pouvoir utiliser les données dans Popup en plus de Grid
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/events');
+        if (!response.ok) {
+          // Vérifier si la réponse est OK (status 200-299) (si ce n'est pas le cas, il lève une erreur)
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();         // Si la réponse est correcte, on extrait les données JSON de la réponse.
+        setEvents(data);                            // Stocker les événements dans l'état
+      } catch (error) {
+        console.error('Erreur lors de la récupération des événements :', error);
+      }
+    }
+    fetchEvents()
+  }, [currentMonth, currentYear]);                    // Appel de l'API à chaque changement de mois ou d'année
+
+
 
   // Affichage de la popup
-  const displayPopup = (type, day='null', dayEvents) => {
+  const displayPopup = (type, day='null', dayEvents = []) => {
     if (day !== "") {
-      setSelectedDay(day)     // Garde une trace du jour sélectionné
-      setPopupType(type)      // Définie le type de la popup
-      setIsPopupOpen(true)    // Ouvre la popup
+      setSelectedDay(day)                 // Garde une trace du jour sélectionné
+      setPopupType(type)                  // Définie le type de la popup
+      setSelectedDayEvents(dayEvents);    // Stocke les événements du jour sélectionné
+      setIsPopupOpen(true)                // Ouvre la popup
     }
   }
 
@@ -57,6 +82,7 @@ function Calendar() {
         currentYear = {currentYear}
         setCurrentYear = {setCurrentYear}
         displayPopup = {displayPopup}
+        events = {events}
       />
 
       {isPopupOpen && (
@@ -67,6 +93,7 @@ function Calendar() {
           currentMonth = {currentMonth}     // Passe le mois actuel
           currentYear = {currentYear}       // Passe l'année actuelle
           setCurrentYear = {setCurrentYear}
+          events={selectedDayEvents}        // Passe les événements du jour sélectionné
         />
       )}
     </div>

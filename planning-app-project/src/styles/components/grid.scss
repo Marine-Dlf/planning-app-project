@@ -34,6 +34,11 @@
 .event {
     font-weight: bold;
     color: rgb(56, 56, 121);
+    border: solid #f9f9f9;
+    width: 95%;
+    background-color: rgb(254, 224, 228);
+    border-radius: 5px;
+    padding: 5px;
 
     .infos {
         font-size: 0.9rem;

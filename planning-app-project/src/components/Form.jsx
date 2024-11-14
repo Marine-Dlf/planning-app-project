@@ -10,7 +10,7 @@ const EMPTY_EVENT = {
 }
 
 
-function Form({ closePopup, selectedDate, closeForm }) {
+function Form({ closePopup, selectedDate }) {
 
     // // const [formData, setFormData] = useState(EMPTY_EVENT);
 
