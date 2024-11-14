@@ -19,7 +19,7 @@ function Calendar() {
 
 
   // Affichage de la popup
-  const displayPopup = (type, day='null') => {
+  const displayPopup = (type, day='null', dayEvents) => {
     if (day !== "") {
       setSelectedDay(day)     // Garde une trace du jour sélectionné
       setPopupType(type)      // Définie le type de la popup

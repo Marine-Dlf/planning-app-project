@@ -10,7 +10,7 @@ const EMPTY_EVENT = {
 }
 
 
-function Form({ closePopup, selectedDate }) {
+function Form({ closePopup, selectedDate, closeForm }) {
 
     // // const [formData, setFormData] = useState(EMPTY_EVENT);
 
@@ -117,7 +117,7 @@ function Form({ closePopup, selectedDate }) {
         <div className='addButton'>
             <button type='submit'>Enregistrer</button>
         </div>
-
+        
       </form>
     </div>
   )
