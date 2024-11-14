@@ -114,10 +114,10 @@ function Form({ closePopup, selectedDate, closeForm }) {
             <textarea name='comment' value={formData.comment} onChange={handleChange}/>
         </div>
 
-        <div className='addButton'>
+        <div className='saveButton'>
             <button type='submit'>Enregistrer</button>
         </div>
-        
+
       </form>
     </div>
   )

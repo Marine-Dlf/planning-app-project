@@ -42,11 +42,11 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                         <Form closePopup={closePopup} selectedDate={new Date(currentYear, currentMonth, day)} />
                     </>
                 ) : (
-                    <>
+                    <div className='listEvents'>
                         <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
                         <p>Les évènements normalement !</p>
-                        <button onClick={openForm}>Add</button>
-                    </>
+                        <button className='addButton' onClick={openForm}>Add</button>
+                    </div>
                 )}
             </div>
         );
@@ -90,7 +90,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                 </div>
 
                 {isFormOpen && (
-                    <button type='button' onClick={(e) => {e.preventDefault(); closeForm();}}>🔙</button>
+                    <button className='backButton' type='button' onClick={(e) => {e.preventDefault(); closeForm();}}>⇦</button>
                 )}
             </div>
 

@@ -52,6 +52,20 @@
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
+
+    .backButton {
+        background-color: white;
+        border: none;
+        font-size: 1.6rem;
+        color: #cb0b61;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.3 ease;
+
+        &:hover {
+            transform: scale(1.08);
+        }
+    }
 }
 
 .form {
@@ -65,7 +79,7 @@
         color: rgb(44, 44, 96);
     }
 
-    .addButton {
+    .saveButton {
         display: flex;
         justify-content: center;
         margin-top: 1rem;
@@ -129,4 +143,38 @@
 
 .hidden {
     display: none;
+}
+
+
+.listEvents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .addButton {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        padding: 5px 7px;
+        color: rgb(44, 44, 96);
+        font-weight: bold;
+        font-size: 1rem;
+        border: solid rgb(250, 236, 238);
+        box-shadow: 2px 2px 2px rgb(44, 44, 96);
+        border-radius: 5px;
+        background-color: rgb(252, 239, 241);
+        width: 4rem;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.05);
+            background-color: pink;
+            border: solid pink;
+        }
+
+        &:active {
+            color: #E00B6C;
+        }
+    }
 }
