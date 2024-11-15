@@ -46,15 +46,17 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                         <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
                         <p>Les évènements normalement !</p>
                         {events.length > 0 ? (
-                        <ul>
+                        <ul className='listItem'>
                             {events.map((event, index) => (
-                                <li key={index}>
-                                    <strong>{event.eventName}</strong><br />
+                                <li key={index} className='item'>
+                                    {/* <strong>{event.eventName}</strong><br /> */}
                                     {event.time ? (
-                                        <span>{new Date(`1970-01-01T${event.time}`).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
-                                    ) : null}
-                                    {event.location ? <div>{event.location}</div> : null}
-                                    {event.comment}
+                                        <span className='time'>{new Date(`1970-01-01T${event.time}`).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                                    ) : null}<br />
+                                    <div className='eventName'><strong>{event.eventName}</strong></div>
+
+                                    {event.location ? <div className='location'>{event.location}</div> : null}
+                                    <div className='comment'>{event.comment}</div>
                                 </li>
                             ))}
                         </ul>

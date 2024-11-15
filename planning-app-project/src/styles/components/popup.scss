@@ -177,4 +177,52 @@
             color: #E00B6C;
         }
     }
+
+    .listItem {
+        width: 85%;
+        height: 200px;
+        margin: 0;
+        padding: 0 10px;
+        // background-color: rgb(241, 239, 239);
+        background-color: rgb(68, 68, 115);
+        border: solid rgb(68, 68, 115) 3px;
+        // background-color: rgb(253, 242, 244);
+        // border: solid rgb(253, 242, 244) 0.5rem;
+        // border: solid rgb(241, 239, 239) 0.5rem;
+        border-radius: 5px;
+        overflow-y: scroll;
+        scrollbar-width: none;
+
+        .item {
+            list-style-type: none;
+            width: auto;
+            padding: 8px;
+            margin: 12px 0;
+            align-self: center;
+            // border: solid white;
+            border-radius: 5px;
+            // background-color: rgb(251, 222, 227);
+            background-color: rgb(249, 212, 218);
+
+            .eventName {
+                // border: solid rgb(249, 212, 218);
+                padding: 4px 0;
+                border-bottom: solid pink;
+            }
+            .time {
+                font-weight: bold;
+            }
+
+            .location {
+                border-bottom: solid pink;
+                // border-top: solid pink;
+                padding: 4px 0;
+            }
+
+            .comment {
+                font-size: 0.95rem;
+                padding: 7px 0;
+            }
+        }
+    }
 }
