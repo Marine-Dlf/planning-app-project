@@ -10,7 +10,7 @@ const EMPTY_EVENT = {
 }
 
 
-function Form({ closePopup, selectedDate }) {
+function Form({ closePopup, selectedDate, fetchEvents }) {
 
     // // const [formData, setFormData] = useState(EMPTY_EVENT);
 
@@ -70,8 +70,9 @@ function Form({ closePopup, selectedDate }) {
                 },
                 body: JSON.stringify(formDataToSend),               // Convertit formData en JSON pour l'envoyer au serveur
             });
-
-            if (!res.ok) {
+            if (res.ok) {
+                await fetchEvents(); // Rafraîchit les événements après ajout
+            } else {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
             const result = await res.json();

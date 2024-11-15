@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../styles/components/popup.scss'
 import Form from './Form';
 
-function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events }) {
+function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, formData, setFormData, EMPTY_EVENT, fetchEvents }) {
 
     const monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
@@ -25,6 +25,29 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         setIsFormOpen(false)
     }
 
+    // Suppression d'un event
+    const deleteEvent = async (id) => {
+        try {
+            const res = await fetch(`http://localhost:5000/events/${id}`, {
+                method: 'DELETE',
+            })
+            if (res.ok) {
+                await fetchEvents()
+                closePopup()
+            } else {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            console.log("Événement supprimé avec succès :");
+        } catch (error) {
+            console.error("Erreur lors de la suppression de l'événement :", error);
+        }
+    }
+
+    const modifyAlert = () => {
+        alert('Modifier')
+        return
+    }
+
 
     let content;
 
@@ -39,7 +62,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                 {isFormOpen ? (
                     <>
                         <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
-                        <Form closePopup={closePopup} selectedDate={new Date(currentYear, currentMonth, day)} />
+                        <Form fetchEvents={fetchEvents} closePopup={closePopup} selectedDate={new Date(currentYear, currentMonth, day)} />
                     </>
                 ) : (
                     <div className='listEvents'>
@@ -51,8 +74,8 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                                 <li key={index} className='item'>
                                     
                                     <div className='buttons'>
-                                        <button className='modifyButton'>✏️</button>
-                                        <button className='deleteButton'>🗑️</button>
+                                        <button className='modifyButton' onClick={modifyAlert}>✏️</button>
+                                        <button className='deleteButton' onClick={() => deleteEvent(event.id)}>🗑️</button>
                                     </div>
 
                                     <div className='eventInfos'>
@@ -88,7 +111,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
         content = <div>
              <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
-             <Form closePopup= {closePopup} selectedDate={date} />
+             <Form fetchEvents={fetchEvents} closePopup= {closePopup} selectedDate={date} />
          </div>
       
     } else if (type === 'month') {

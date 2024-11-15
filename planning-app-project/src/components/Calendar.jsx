@@ -60,6 +60,23 @@ function Calendar() {
   }
 
 
+  // Rafraîchissement après les fetchs
+  const fetchEvents = async () => {
+    try {
+        const response = await fetch('http://localhost:5000/events');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setEvents(data);
+        closePopup()
+    } catch (error) {
+        console.error('Erreur lors de la récupération des événements :', error);
+    }
+  };
+
+
+
   return (
     <div>
       <CurrentDate 
@@ -93,7 +110,8 @@ function Calendar() {
           currentMonth = {currentMonth}     // Passe le mois actuel
           currentYear = {currentYear}       // Passe l'année actuelle
           setCurrentYear = {setCurrentYear}
-          events={selectedDayEvents}        // Passe les événements du jour sélectionné
+          events = {selectedDayEvents}      // Passe les événements du jour sélectionné
+          fetchEvents = {fetchEvents}       // Rafraîchissement après les fetchs
         />
       )}
     </div>
