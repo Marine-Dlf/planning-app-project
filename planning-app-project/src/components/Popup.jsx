@@ -44,25 +44,35 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                 ) : (
                     <div className='listEvents'>
                         <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
-                        <p>Les évènements normalement !</p>
+                        <p>Evènement(s)</p>
                         {events.length > 0 ? (
                         <ul className='listItem'>
                             {events.map((event, index) => (
                                 <li key={index} className='item'>
-                                    {/* <strong>{event.eventName}</strong><br /> */}
-                                    {event.time ? (
-                                        <span className='time'>{new Date(`1970-01-01T${event.time}`).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
-                                    ) : null}<br />
-                                    <div className='eventName'><strong>{event.eventName}</strong></div>
+                                    
+                                    <div className='buttons'>
+                                        <button className='modifyButton'>✏️</button>
+                                        <button className='deleteButton'>🗑️</button>
+                                    </div>
 
-                                    {event.location ? <div className='location'>{event.location}</div> : null}
-                                    <div className='comment'>{event.comment}</div>
+                                    <div className='eventInfos'>
+                                        {event.time ? (
+                                            <span className='time'>{new Date(`1970-01-01T${event.time}`).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                                        ) : null}<br />
+
+                                        <div className='eventName'><strong>{event.eventName}</strong></div>
+
+                                        {event.location ? <div className='location'>{event.location}</div> : null}
+
+                                        <div className='comment'>{event.comment}</div>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
                     ) : (
                         <p>Aucun événement pour ce jour</p>
                     )}
+
                         <button className='addButton' onClick={openForm}>Add</button>
                     </div>
                 )}

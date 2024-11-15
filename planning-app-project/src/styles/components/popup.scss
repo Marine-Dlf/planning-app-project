@@ -203,9 +203,27 @@
             border-radius: 5px;
             // background-color: rgb(251, 222, 227);
             background-color: rgb(249, 212, 218);
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+
+            .buttons {
+                display: flex;
+                flex-direction: column;
+
+                .modifyButton, .deleteButton {
+                    border: solid rgb(249, 212, 218);
+                    background-color: rgb(249, 212, 218);
+                    cursor: pointer;
+                    transition: transform 0.3 ease;
+
+                    &:hover {
+                        transform: scale(1.15);
+                    }
+                }
+            }
 
             .eventName {
-                // border: solid rgb(249, 212, 218);
                 padding: 4px 0;
                 border-bottom: solid pink;
             }
@@ -215,7 +233,6 @@
 
             .location {
                 border-bottom: solid pink;
-                // border-top: solid pink;
                 padding: 4px 0;
             }
 
