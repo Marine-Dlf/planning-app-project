@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/components/popup.scss'
 
 
@@ -10,7 +10,7 @@ const EMPTY_EVENT = {
 }
 
 
-function Form({ closePopup, selectedDate, fetchEvents }) {
+function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode }) {
 
     // // const [formData, setFormData] = useState(EMPTY_EVENT);
 
@@ -22,16 +22,31 @@ function Form({ closePopup, selectedDate, fetchEvents }) {
         return `${year}-${month}-${day}`;  // Retourne le format YYYY-MM-DD
       };
     
+
       const [formData, setFormData] = useState({
         ...EMPTY_EVENT,
         date: formatDate(selectedDate),  // Format local
       });
+
 
     const formfields = [
         { label: "Evènement", type: "text", name: "eventName"},
         { label: "Horaire", type: "time", name: "time"},
         { label: "Lieu", type: "text", name: "location"},
     ]
+
+
+    // Pré-remplissage des champs en mode édition du formulaire
+    useEffect(() => {
+        if (isEditMode && eventSelected) {
+            setFormData({
+                eventName: eventSelected.eventName || '',
+                time: eventSelected.time || '',
+                location: eventSelected.location || '',
+                comment: eventSelected.comment || ''
+            })
+        }
+    }, [isEditMode, eventSelected])
 
 
     // Fonction qui détecte un changement
@@ -50,6 +65,9 @@ function Form({ closePopup, selectedDate, fetchEvents }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        const method = isEditMode ? 'PUT' : 'POST'
+        const url = isEditMode ? `http://localhost:5000/events/${eventSelected.id}` : 'http://localhost:5000/events'
+
         // Vérifie si eventName est valdide (non vide)
         if (formData.eventName.trim() === '') {
             alert('Evènement obligatoire')
@@ -63,24 +81,22 @@ function Form({ closePopup, selectedDate, fetchEvents }) {
             time: formData.time === '' ? null : formData.time,
             }
 
-            const res = await fetch('http://localhost:5000/events', {
-                method: 'POST',
+            const res = await fetch(url, {
+                method: method,
                 headers: {
                     'Content-Type': 'application/json',             // Spécifie que les données sont au format JSON
                 },
                 body: JSON.stringify(formDataToSend),               // Convertit formData en JSON pour l'envoyer au serveur
             });
+
             if (res.ok) {
                 await fetchEvents(); // Rafraîchit les événements après ajout
+                console.log(`Evènement ${isEditMode ? 'modifié' : 'créé'} avec succès !`)
+                closePopup()
             } else {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
-            const result = await res.json();
-            console.log("Événement enregistré avec succès :", result);
-
-            // Réinitialiser le formulaire et fermer la popup
-            setFormData(EMPTY_EVENT);
-            closePopup()
+            
         } catch (error) {
             console.error("Erreur lors de l'enregistrement de l'événement :", error);
         }
@@ -99,7 +115,7 @@ function Form({ closePopup, selectedDate, fetchEvents }) {
                 <input
                     type="text"
                     name="date"
-                    value={formData.date}
+                    value={formData.date || ''}
                     readOnly   // Affiche la date de manière non modifiable
             />
             </div>
@@ -110,7 +126,7 @@ function Form({ closePopup, selectedDate, fetchEvents }) {
                     <input
                         type={field.type}
                         name={field.name}
-                        value={formData[field.name]}
+                        value={formData[field.name] || ''}
                         onChange={handleChange}
                     />
                 </div>
@@ -123,7 +139,7 @@ function Form({ closePopup, selectedDate, fetchEvents }) {
         </div>
 
         <div className='saveButton'>
-            <button type='submit'>Enregistrer</button>
+            <button type='submit'>{isEditMode ? 'Modifier' : 'Enregistrer'}</button>
         </div>
 
       </form>

@@ -13,17 +13,41 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         closePopup()
     }
 
-    // Gestion de l'ouverture du formulaire
-    const [isFormOpen, setIsFormOpen] = useState(false)
+  
+    const [isFormOpen, setIsFormOpen] = useState(false)         // Gestion de l'ouverture du formulaire
+    const [isEditMode, setIsEditMode] = useState(false)         // Gestion du mode éditer (modification)
+    const [eventSelected, setEventSelected] = useState(null)    
 
+
+    // Ouverture du formulaire de création
     const openForm = () => {
-        console.log('Ouvert')
+        setEventSelected(null)
+        setIsEditMode(false)
         setIsFormOpen(true)
     }
 
+    // Ouverture du formulaire de modification
+    const openEditForm = (event) => {
+        setEventSelected(event)
+        setIsEditMode(true)
+        setIsFormOpen(true)
+    }
+
+    // Fermeture des formulaires
     const closeForm = () => {
         setIsFormOpen(false)
+        setEventSelected(null)
+        setIsEditMode(false)
     }
+
+    // const openForm = () => {
+    //     console.log('Ouvert')
+    //     setIsFormOpen(true)
+    // }
+
+    // const closeForm = () => {
+    //     setIsFormOpen(false)
+    // }
 
     // Suppression d'un event
     const deleteEvent = async (id) => {
@@ -44,10 +68,10 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         }
     }
 
-    const modifyAlert = () => {
-        alert('Modifier')
-        return
-    }
+    // const modifyAlert = () => {
+    //     alert('Modifier')
+    //     return
+    // }
 
 
     let content;
@@ -63,7 +87,13 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                 {isFormOpen ? (
                     <>
                         <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
-                        <Form fetchEvents={fetchEvents} closePopup={closePopup} selectedDate={new Date(currentYear, currentMonth, day)} />
+                        <Form 
+                            fetchEvents={fetchEvents}
+                            closePopup={closePopup}
+                            selectedDate={new Date(currentYear, currentMonth, day)}
+                            eventSelected={eventSelected}   // Passe les données de l'évènement sélectionné
+                            isEditMode={isEditMode}         // Précise si on est en mode édition
+                        />
                     </>
                 ) : (
                     <div className='listEvents'>
@@ -75,7 +105,8 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                                 <li key={index} className='item'>
                                     
                                     <div className='buttons'>
-                                        <button className='modifyButton' onClick={modifyAlert}>✏️</button>
+                                        {/*<button className='modifyButton' onClick={modifyAlert}>✏️</button>*/}
+                                        <button className='modifyButton' onClick={() => openEditForm(event)}>✏️</button>
                                         <button className='deleteButton' onClick={() => deleteEvent(event.id)}>🗑️</button>
                                     </div>
 
