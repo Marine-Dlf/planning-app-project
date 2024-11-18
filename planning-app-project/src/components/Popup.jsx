@@ -126,7 +126,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                         <p>Aucun événement pour ce jour</p>
                     )}
 
-                        <button className='addButton' onClick={openForm}>Add</button>
+                        <button className='addButton' onClick={openForm}>+</button>
                     </div>
                 )}
             </div>
