@@ -27,6 +27,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
     // Suppression d'un event
     const deleteEvent = async (id) => {
+        window.confirm("Souhaitez-vous vraiment supprimer l'évènement ?")
         try {
             const res = await fetch(`http://localhost:5000/events/${id}`, {
                 method: 'DELETE',
