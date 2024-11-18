@@ -96,7 +96,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
             } else {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
-            
+
         } catch (error) {
             console.error("Erreur lors de l'enregistrement de l'événement :", error);
         }

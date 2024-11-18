@@ -13,10 +13,11 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         closePopup()
     }
 
+
   
     const [isFormOpen, setIsFormOpen] = useState(false)         // Gestion de l'ouverture du formulaire
     const [isEditMode, setIsEditMode] = useState(false)         // Gestion du mode éditer (modification)
-    const [eventSelected, setEventSelected] = useState(null)    
+    const [eventSelected, setEventSelected] = useState(null)
 
 
     // Ouverture du formulaire de création
@@ -40,14 +41,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         setIsEditMode(false)
     }
 
-    // const openForm = () => {
-    //     console.log('Ouvert')
-    //     setIsFormOpen(true)
-    // }
 
-    // const closeForm = () => {
-    //     setIsFormOpen(false)
-    // }
 
     // Suppression d'un event
     const deleteEvent = async (id) => {
@@ -68,10 +62,6 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         }
     }
 
-    // const modifyAlert = () => {
-    //     alert('Modifier')
-    //     return
-    // }
 
 
     let content;
@@ -105,7 +95,6 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                                 <li key={index} className='item'>
                                     
                                     <div className='buttons'>
-                                        {/*<button className='modifyButton' onClick={modifyAlert}>✏️</button>*/}
                                         <button className='modifyButton' onClick={() => openEditForm(event)}>✏️</button>
                                         <button className='deleteButton' onClick={() => deleteEvent(event.id)}>🗑️</button>
                                     </div>
@@ -119,7 +108,16 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
                                         {event.location ? <div className='location'>{event.location}</div> : null}
 
-                                        <div className='comment'>{event.comment}</div>
+                                        <div className='comment'>
+                                            {event.comment
+                                                .split('\n')                    // Gère le retour à la ligne
+                                                .map((line, index) => (
+                                                    <div key = {index}>
+                                                        {line || <br />}
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
                                     </div>
                                 </li>
                             ))}
