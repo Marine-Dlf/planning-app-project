@@ -45,7 +45,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
     // Suppression d'un event
     const deleteEvent = async (id, eventNameSelected) => {
-        const confirmDelete = window.confirm(`Souhaitez-vous vraiment supprimer l'évènement: ${eventNameSelected} ?`)
+        const confirmDelete = window.confirm(`Souhaitez-vous vraiment supprimer l'évènement:\n"${eventNameSelected}" ?`)
         if (confirmDelete) {
             try {
                 const res = await fetch(`http://localhost:5000/events/${id}`, {
@@ -93,7 +93,14 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                         <p>Evènement(s)</p>
                         {events.length > 0 ? (
                         <ul className='listItem'>
-                            {events.map((event, index) => (
+                            {events
+                            .slice()                                // Création d'une copie de l'array
+                            .sort((a, b) => {                       // Classement des events par heure
+                                const timeA = a.time || '00:00'
+                                const timeB = b.time || '00:00'
+                                return timeA.localeCompare(timeB)
+                            })
+                            .map((event, index) => (
                                 <li key={index} className='item'>
                                     
                                     <div className='buttons'>

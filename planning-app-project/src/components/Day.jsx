@@ -10,7 +10,14 @@ function Day({ day, onClick, events }) {
     {day !== '' ? (
         <>
           <p className='number'>{day}</p>
-          {events.map((event, index) => {
+          {events
+          .slice()                              // Création d'une copie de l'array pour éviter de modifier l'original
+          .sort((a, b) => {                     // Classement des events par heure
+            const timeA = a.time || '00:00'
+            const timeB = b.time || '00:00'
+            return timeA.localeCompare(timeB)
+          })
+          .map((event, index) => {
             // Formatage de l'heure `time` pour exclure les secondes
             let formattedTime
             if (event.time !== null) {
