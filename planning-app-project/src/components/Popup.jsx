@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../styles/components/popup.scss'
 import Form from './Form';
 
-function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, formData, setFormData, EMPTY_EVENT, fetchEvents }) {
+function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, fetchEvents }) {
 
     const monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
