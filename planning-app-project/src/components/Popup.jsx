@@ -44,21 +44,23 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
 
     // Suppression d'un event
-    const deleteEvent = async (id) => {
-        window.confirm("Souhaitez-vous vraiment supprimer l'évènement ?")
-        try {
-            const res = await fetch(`http://localhost:5000/events/${id}`, {
-                method: 'DELETE',
-            })
-            if (res.ok) {
-                await fetchEvents()
-                closePopup()
-            } else {
-            throw new Error(`HTTP error! Status: ${res.status}`);
+    const deleteEvent = async (id, eventNameSelected) => {
+        const confirmDelete = window.confirm(`Souhaitez-vous vraiment supprimer l'évènement: ${eventNameSelected} ?`)
+        if (confirmDelete) {
+            try {
+                const res = await fetch(`http://localhost:5000/events/${id}`, {
+                    method: 'DELETE',
+                })
+                if (res.ok) {
+                    await fetchEvents()
+                    closePopup()
+                } else {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+                console.log("Événement supprimé avec succès :");
+            } catch (error) {
+                console.error("Erreur lors de la suppression de l'événement :", error);
             }
-            console.log("Événement supprimé avec succès :");
-        } catch (error) {
-            console.error("Erreur lors de la suppression de l'événement :", error);
         }
     }
 
@@ -96,7 +98,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                                     
                                     <div className='buttons'>
                                         <button className='modifyButton' onClick={() => openEditForm(event)}>✏️</button>
-                                        <button className='deleteButton' onClick={() => deleteEvent(event.id)}>🗑️</button>
+                                        <button className='deleteButton' onClick={() => deleteEvent(event.id, event.eventName)}>🗑️</button>
                                     </div>
 
                                     <div className='eventInfos'>
