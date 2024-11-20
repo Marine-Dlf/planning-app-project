@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 
 function LoginForm({ title, buttonText, changeText, changeLink, onSubmit }) {
-  // Ajoutez l'état pour gérer les valeurs des champs
+  // Add state to manage field values
   const [formData, setFormData] = useState({
     pseudo: '',
     email: '',
     password: ''
   });
 
-  // Fonction pour gérer les changements dans les champs
+  // Management of changes in fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -19,10 +19,10 @@ function LoginForm({ title, buttonText, changeText, changeLink, onSubmit }) {
     }));
   };
 
-  // Adapter la fonction onSubmit pour inclure les données du formulaire
+  // Adapt the onSubmit function to include form data
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData); // Passe les données du formulaire à la fonction onSubmit
+    onSubmit(formData); // Pass the form data to the onSubmit function
   };
 
 

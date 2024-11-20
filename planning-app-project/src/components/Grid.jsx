@@ -5,7 +5,7 @@ import Day from './Day';
 
 function Grid({ currentMonth, currentYear, displayPopup, events }) {
 
-  const [grid, setGrid] = useState([]);      // Génère un tableau des jours du mois
+  const [grid, setGrid] = useState([]);      // Generates a table of the days of the month
 
 
   const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate()
@@ -17,46 +17,46 @@ function Grid({ currentMonth, currentYear, displayPopup, events }) {
   }
 
 
-  // Calcule et met à jour la grille des jours du mois actuel à chaque fois que l'année (currentYear) ou le mois (currentMonth) change
-  // Génère un tableau contenant ts les jours du mois et met à jour l'état "grid" avec ce tableau => permet de re-rendre l'interface avec le bon nombre de jours
+  // Calculates and updates the grid of days of the current month each time the year (currentYear) or month (currentMonth) changes
+  // Generates an array containing all the days of the month and updates the "grid" state with this array => allows to re-render the interface with the correct number of days
   useEffect(() => {
     const daysInMonth = getDaysInMonth(currentYear, currentMonth)
     let firstDay = getFirstDayInMonth(currentYear, currentMonth)
     let newGrid = []
 
-    // Ajoute des cases vides au début pour aligner le premier jour du mois
+    // Add empty boxes at the beginning to align with the first day of the month
     for (let j = 0; j < firstDay; j++) {
       newGrid.push("")
     }
 
-    // Ajoute les jours du mois
+    // Add the days of the month
     for (let i = 1; i <= daysInMonth; i++) {
       newGrid.push(i)
     }
 
     setGrid(newGrid)
 
-  }, [currentYear, currentMonth])   // [currentYear, currentMonth], indique que cet effet doit se ré-exécuter à chaque fois que currentYear ou currentMonth change
+  }, [currentYear, currentMonth])   // [currentYear, currentMonth], indicates that this effect should re-run every time currentYear or currentMonth changes
 
 
-  // Parcours du tableau
+  // Browse the array
   const browseGrid = () => grid.map((day, index) => {
 
-    const dayEvents = events.filter(                            // Filtre les events pr obtenir uniquement ceux qui correspondent au jour en cours
-      (event) =>                                                // puis, event.date est converti en Date
-        new Date(event.date).getFullYear() === currentYear &&   // et on vérifie si l'année,   
-        new Date(event.date).getMonth() === currentMonth &&     // le mois 
-        new Date(event.date).getDate() === day                  // et le jour de cet événement correspondent à currentYear, currentMonth et day
+    const dayEvents = events.filter(                            // Filter events to get only those that match to the current day
+      (event) =>                                                // then, event.date is converted to Date
+        new Date(event.date).getFullYear() === currentYear &&   // and we check if the year,   
+        new Date(event.date).getMonth() === currentMonth &&     // the month 
+        new Date(event.date).getDate() === day                  // and the day of this event correspond to currentYear, currentMonth and day
     );
 
-    const popupType = dayEvents.length > 0 ? 'dayWithEvent' : 'dayWithoutEvent';    // Type de popup selon la présence ou non d'événement(s)
+    const popupType = dayEvents.length > 0 ? 'dayWithEvent' : 'dayWithoutEvent';    // Type of popup depending on the presence or absence of event(s)
 
     return (
     <Day
       key = {index}
-      day = {day}             // Passe le jour ou la case vide au composant Day
-      events = {dayEvents}    // Passe les évènements de ce jour au composant Day
-      onClick = {day ? () => displayPopup(popupType, day, dayEvents) : undefined}     // Passe l'action de clic au composant Day (le type 'day' a été remplacé par popupType)
+      day = {day}             // Pass the day or empty box to the Day component
+      events = {dayEvents}    // Pass today's events to the Day component
+      onClick = {day ? () => displayPopup(popupType, day, dayEvents) : undefined}     // Passes the click action to the Day component (the 'day' type has been replaced by popupType)
     />
     )
   })

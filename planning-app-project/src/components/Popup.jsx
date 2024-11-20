@@ -7,7 +7,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
     const monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
 
-    // A la détection du clic de l'année
+    // On detection of the click of the year
     const handleYearClick = (year) => {
         setCurrentYear(year)
         closePopup()
@@ -15,26 +15,26 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
 
   
-    const [isFormOpen, setIsFormOpen] = useState(false)         // Gestion de l'ouverture du formulaire
-    const [isEditMode, setIsEditMode] = useState(false)         // Gestion du mode éditer (modification)
+    const [isFormOpen, setIsFormOpen] = useState(false)         // Form Opening Management
+    const [isEditMode, setIsEditMode] = useState(false)         // Edit Mode Management
     const [eventSelected, setEventSelected] = useState(null)
 
 
-    // Ouverture du formulaire de création
+    // Opening the creation form
     const openForm = () => {
         setEventSelected(null)
         setIsEditMode(false)
         setIsFormOpen(true)
     }
 
-    // Ouverture du formulaire de modification
+    // Opening the edit form
     const openEditForm = (event) => {
         setEventSelected(event)
         setIsEditMode(true)
         setIsFormOpen(true)
     }
 
-    // Fermeture des formulaires
+    // Closing forms
     const closeForm = () => {
         setIsFormOpen(false)
         setEventSelected(null)
@@ -43,7 +43,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
 
 
-    // Suppression d'un event
+    // Deleting an event
     const deleteEvent = async (id, eventNameSelected) => {
         const confirmDelete = window.confirm(`Souhaitez-vous vraiment supprimer l'évènement:\n"${eventNameSelected}" ?`)
         if (confirmDelete) {
@@ -83,8 +83,8 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                             fetchEvents={fetchEvents}
                             closePopup={closePopup}
                             selectedDate={new Date(currentYear, currentMonth, day)}
-                            eventSelected={eventSelected}   // Passe les données de l'évènement sélectionné
-                            isEditMode={isEditMode}         // Précise si on est en mode édition
+                            eventSelected={eventSelected}   // Passes the data of the selected event
+                            isEditMode={isEditMode}         // Specifies if we are in edit mode
                         />
                     </>
                 ) : (
@@ -94,8 +94,8 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                         {events.length > 0 ? (
                         <ul className='listItem'>
                             {events
-                            .slice()                                // Création d'une copie de l'array
-                            .sort((a, b) => {                       // Classement des events par heure
+                            .slice()                                // Create a copy of the array
+                            .sort((a, b) => {                       // Ranking of events (in order of time)
                                 const timeA = a.time || '00:00'
                                 const timeB = b.time || '00:00'
                                 return timeA.localeCompare(timeB)
@@ -119,7 +119,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
                                         <div className='comment'>
                                             {event.comment
-                                                .split('\n')                    // Gère le retour à la ligne
+                                                .split('\n')                    // Handles line breaks
                                                 .map((line, index) => (
                                                     <div key = {index}>
                                                         {line || <br />}

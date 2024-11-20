@@ -11,14 +11,14 @@ function Day({ day, onClick, events }) {
         <>
           <p className='number'>{day}</p>
           {events
-          .slice()                              // Création d'une copie de l'array pour éviter de modifier l'original
-          .sort((a, b) => {                     // Classement des events par heure
+          .slice()                              // Create a copy of the array to avoid modifying the original
+          .sort((a, b) => {                     // Ranking of events (in order of time)
             const timeA = a.time || '00:00'
             const timeB = b.time || '00:00'
             return timeA.localeCompare(timeB)
           })
           .map((event, index) => {
-            // Formatage de l'heure `time` pour exclure les secondes
+            // Formatting `time` to exclude seconds
             let formattedTime
             if (event.time !== null) {
             formattedTime = new Date(`1970-01-01T${event.time}`).toLocaleTimeString('en-GB', {
@@ -34,7 +34,7 @@ function Day({ day, onClick, events }) {
 
                   {event.eventName}<br/>
 
-                  {/* Affichage conditionnel de event.location et formattedTime */}
+                  {/* Conditional display of event.location and formattedTime */}
                   <div className="infos">
                     {formattedTime && event.location
                       ? `${formattedTime} - ${event.location}`

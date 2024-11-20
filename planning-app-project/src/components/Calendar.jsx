@@ -17,50 +17,50 @@ function Calendar() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [popupType, setPopupType] = useState(null);
 
-  const [events, setEvents] = useState([])   // État pour stocker les événements
-  const [selectedDayEvents, setSelectedDayEvents] = useState([]);   // Stocke les évènement du jour sélectionné
+  const [events, setEvents] = useState([])   // State to store events
+  const [selectedDayEvents, setSelectedDayEvents] = useState([]);   // Store the events of the selected day
 
   
 
-  // Fetch pour ensuite pouvoir afficher les données // J'ai déplacé le fetch depuis Grid à ici (Calendar) pour pouvoir utiliser les données dans Popup en plus de Grid
+  // Fetch to then be able to display the data   // I moved the fetch from Grid to here (Calendar) to be able to use the data in Popup in addition to Grid
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await fetch('http://localhost:5000/events');
         if (!response.ok) {
-          // Vérifier si la réponse est OK (status 200-299) (si ce n'est pas le cas, il lève une erreur)
+          // Check if the response is OK (status 200-299) (if not, it throws an error)
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await response.json();         // Si la réponse est correcte, on extrait les données JSON de la réponse.
-        setEvents(data);                            // Stocker les événements dans l'état
+        const data = await response.json();         // If the response is correct, we extract the JSON data from the response
+        setEvents(data);                            // Store events in state
       } catch (error) {
         console.error('Erreur lors de la récupération des événements :', error);
       }
     }
     fetchEvents()
-  }, [currentMonth, currentYear]);                    // Appel de l'API à chaque changement de mois ou d'année
+  }, [currentMonth, currentYear]);                  // Call the API every time the month or year changes
 
 
 
-  // Affichage de la popup
+  // Popup display
   const displayPopup = (type, day='null', dayEvents = []) => {
     if (day !== "") {
-      setSelectedDay(day)                 // Garde une trace du jour sélectionné
-      setPopupType(type)                  // Définie le type de la popup
-      setSelectedDayEvents(dayEvents);    // Stocke les événements du jour sélectionné
-      setIsPopupOpen(true)                // Ouvre la popup
+      setSelectedDay(day)                 // Keep track of the selected day
+      setPopupType(type)                  // Sets the type of the popup
+      setSelectedDayEvents(dayEvents);    // Stores events of the selected day
+      setIsPopupOpen(true)                // Open the popup
     }
   }
 
   // Fermeture de la popup
   const closePopup = () => {
     setIsPopupOpen(false)
-    setSelectedDay(null)    // Réinitialise le jour sélectionné si nécessaire
-    setPopupType(null)      // Réinitialise le type de la popup
+    setSelectedDay(null)    // Resets the selected day if necessary
+    setPopupType(null)      // Resets the popup type
   }
 
 
-  // Rafraîchissement après les fetchs
+  // Refreshment after fetches
   const fetchEvents = async () => {
     try {
         const response = await fetch('http://localhost:5000/events');
@@ -104,14 +104,14 @@ function Calendar() {
 
       {isPopupOpen && (
         <Popup
-          type = {popupType}                // Passe le type de la popup
-          day = {selectedDay}               // On peut passer le jour sélectionné si nécessaire
-          closePopup = {closePopup}         // Passe la fonction pour fermer la popup
-          currentMonth = {currentMonth}     // Passe le mois actuel
-          currentYear = {currentYear}       // Passe l'année actuelle
+          type = {popupType}                // Pass the 'type' prop to Popup
+          day = {selectedDay}               // The selected day can be skipped if necessary
+          closePopup = {closePopup}         // Pass the function to close the popup
+          currentMonth = {currentMonth}     // Pass the current month
+          currentYear = {currentYear}       // Pass the current year
           setCurrentYear = {setCurrentYear}
-          events = {selectedDayEvents}      // Passe les événements du jour sélectionné
-          fetchEvents = {fetchEvents}       // Rafraîchissement après les fetchs
+          events = {selectedDayEvents}      // Pass the events of the selected day
+          fetchEvents = {fetchEvents}       // Refreshment after fetches
         />
       )}
     </div>

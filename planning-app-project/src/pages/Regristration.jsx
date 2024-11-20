@@ -6,7 +6,7 @@ import '../styles/pages/connexionRegistration.scss'
 function Registration() {
 
   const handleRegistration = (formData) => {
-    // Utilisez formData pour traiter l'inscription
+    // Use formData to handle the registration
     console.log('Données d\'inscription:', formData);
   };
 

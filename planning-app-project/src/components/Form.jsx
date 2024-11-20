@@ -15,18 +15,18 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
 
     // // const [formData, setFormData] = useState(EMPTY_EVENT);
 
-    // Permet de stocker les dates dans un format standardisé YYYY-MM-DD, compatible avec de nombreuses bases de données et conventions API
+    // Allows dates to be stored in a standardized YYYY-MM-DD format, compatible with many databases and API conventions
       const formatDate = (date) => {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;  // Retourne le format YYYY-MM-DD
+        return `${year}-${month}-${day}`;       // Returns the format YYYY-MM-DD
       };
     
 
       const [formData, setFormData] = useState({
         ...EMPTY_EVENT,
-        date: formatDate(selectedDate),  // Format local
+        date: formatDate(selectedDate),  // Local format
       });
 
 
@@ -38,7 +38,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
     ]
 
 
-    // Pré-remplissage des champs en mode édition du formulaire
+    // Pre-filling fields in form edit mode
     useEffect(() => {
         if (isEditMode && eventSelected) {
             setFormData({
@@ -52,7 +52,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
     }, [isEditMode, eventSelected])
 
 
-    // Fonction qui détecte un changement
+    // Detects change
     const handleChange = (e) => {
         const {name, value} = e.target      // Récupère automatiquement le name et le value de l’élément (input) qui a déclenché l'événement onChange. (Cet objet fait référence à l'élément qui a déclenché l'événement (ici: un input du formulaire)   (name correspond à l'attribut name de l'élément de formulaire (input, textarea, etc.))  ( Cela correspond à la valeur actuelle du champ de formulaire (value à ce que l'utilisateur vient de taper (ou sélectionner) dans l'input)))
         
@@ -64,21 +64,21 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
     }
 
 
-    // Détecte la soumission du formulaire
+    // Detects form submission
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const method = isEditMode ? 'PUT' : 'POST'
         const url = isEditMode ? `http://localhost:5000/events/${eventSelected.id}` : 'http://localhost:5000/events'
 
-        // Vérifie si eventName est valdide (non vide)
+        // Checks if eventName is valid (not empty)
         if (formData.eventName.trim() === '') {
             alert('Evènement obligatoire')
             return
         }
 
         try {
-            // Si le champ 'time' est vide, on le met à null
+            // If the 'time' field is empty, we set it to null
             const formDataToSend = {
             ...formData,
             time: formData.time === '' ? null : formData.time,
@@ -87,13 +87,13 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
             const res = await fetch(url, {
                 method: method,
                 headers: {
-                    'Content-Type': 'application/json',             // Spécifie que les données sont au format JSON
+                    'Content-Type': 'application/json',             // Specifies the data is in JSON format
                 },
-                body: JSON.stringify(formDataToSend),               // Convertit formData en JSON pour l'envoyer au serveur
+                body: JSON.stringify(formDataToSend),               // Converts formData to JSON to send to the server
             });
 
             if (res.ok) {
-                await fetchEvents(); // Rafraîchit les événements après ajout
+                await fetchEvents();    // Refresh events after adding
                 console.log(`Evènement ${isEditMode ? 'modifié' : 'créé'} avec succès !`)
                 closePopup()
             } else {
@@ -119,7 +119,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
                     type="text"
                     name="date"
                     value={formData.date || ''}
-                    readOnly   // Affiche la date de manière non modifiable
+                    readOnly   // Display the date in an unchangeable manner
             />
             </div>
 
@@ -128,7 +128,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
                 <div key={field.name} className='formStep'>
                     <label>{field.label}</label>
                     {field.type === 'select' ? (
-                        // Gestion de la liste déroulante des catégories
+                        // Managing the category drop-down list
                         <select
                             name={field.name}
                             value={formData[field.name] || ''}

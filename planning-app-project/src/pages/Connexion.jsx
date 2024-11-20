@@ -5,7 +5,7 @@ import '../styles/pages/connexionRegistration.scss'
 
 function Connexion() {
   const handleConnexion = (formData) => {
-    // Utilisez formData pour traiter la connexion
+    // Use formData to handle the connection
     console.log('Données de connexion:', formData);
   };
 
