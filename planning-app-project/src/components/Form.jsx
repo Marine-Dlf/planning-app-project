@@ -3,6 +3,7 @@ import '../styles/components/popup.scss'
 
 
 const EMPTY_EVENT = {
+    typeName: '',
     eventName: '',
     time: '',
     location: '',
@@ -30,6 +31,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
 
 
     const formfields = [
+        { label: "Catégorie", type: "select", name: "typeName", options: ["Spectacle", "Concours", "Répétition", "Réunion", "Autre"] },
         { label: "Evènement", type: "text", name: "eventName"},
         { label: "Horaire", type: "time", name: "time"},
         { label: "Lieu", type: "text", name: "location"},
@@ -40,6 +42,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
     useEffect(() => {
         if (isEditMode && eventSelected) {
             setFormData({
+                typeName: eventSelected.typeName || '',
                 eventName: eventSelected.eventName || '',
                 time: eventSelected.time || '',
                 location: eventSelected.location || '',
@@ -120,15 +123,32 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
             />
             </div>
 
+
             {formfields.map((field) => (
                 <div key={field.name} className='formStep'>
                     <label>{field.label}</label>
-                    <input
-                        type={field.type}
-                        name={field.name}
-                        value={formData[field.name] || ''}
-                        onChange={handleChange}
-                    />
+                    {field.type === 'select' ? (
+                        // Gestion de la liste déroulante des catégories
+                        <select
+                            name={field.name}
+                            value={formData[field.name] || ''}
+                            onChange={handleChange}
+                        >
+                            <option value="">- - Choisir une catégorie - -</option>
+                            {field.options.map((option, index) => (
+                                <option key={index} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
+                    ) : (
+                        <input
+                            type={field.type}
+                            name={field.name}
+                            value={formData[field.name] || ''}
+                            onChange={handleChange}
+                        />
+                    )}
                 </div>
             ))}
         </div>
