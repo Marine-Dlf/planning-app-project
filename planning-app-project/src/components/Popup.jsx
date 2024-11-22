@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../styles/components/popup.scss'
 import Form from './Form';
 
-function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, fetchEvents }) {
+function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, fetchEvents, types }) {
 
     const monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
@@ -63,8 +63,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
             }
         }
     }
-
-
+      
 
     let content;
 
@@ -81,6 +80,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                         <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
                         <Form 
                             fetchEvents={fetchEvents}
+                            types={types}
                             closePopup={closePopup}
                             selectedDate={new Date(currentYear, currentMonth, day)}
                             eventSelected={eventSelected}   // Passes the data of the selected event
@@ -150,7 +150,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
         content = <div>
              <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
-             <Form fetchEvents={fetchEvents} closePopup= {closePopup} selectedDate={date} />
+             <Form fetchEvents={fetchEvents} closePopup= {closePopup} selectedDate={date} types={types} />
          </div>
       
     } else if (type === 'month') {
@@ -165,7 +165,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
             <button onClick={() => handleYearClick(currentYear + 2)}>{currentYear + 2}</button>
         </div>
     }
-
+      
 
     return (
         <div className='popupBackground'>

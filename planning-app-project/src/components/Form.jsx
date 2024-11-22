@@ -11,7 +11,7 @@ const EMPTY_EVENT = {
 }
 
 
-function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode }) {
+function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode, types }) {
 
     // // const [formData, setFormData] = useState(EMPTY_EVENT);
 
@@ -31,7 +31,8 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
 
 
     const formfields = [
-        { label: "Catégorie", type: "select", name: "typeName", options: ["Spectacle", "Concours", "Répétition", "Réunion", "Autre"] },
+        // { label: "Catégorie", type: "select", name: "typeName", options: ["Spectacle", "Concours", "Répétition", "Réunion", "Autre"] },
+        { label: "Catégorie", type: "select", name: "typeName", options: types },
         { label: "Evènement", type: "text", name: "eventName"},
         { label: "Horaire", type: "time", name: "time"},
         { label: "Lieu", type: "text", name: "location"},
@@ -72,7 +73,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
         const url = isEditMode ? `http://localhost:5000/events/${eventSelected.id}` : 'http://localhost:5000/events'
 
         // Checks if eventName is valid (not empty)
-        if (formData.eventName.trim() === '') {
+        if (formData.eventName.trim() === '' || !formData.typeName) {
             alert('Evènement obligatoire')
             return
         }
@@ -95,6 +96,8 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
             if (res.ok) {
                 await fetchEvents();    // Refresh events after adding
                 console.log(`Evènement ${isEditMode ? 'modifié' : 'créé'} avec succès !`)
+                // await fetchTypes();
+                // console.log((`Type ${isEditMode ? 'modifié' : 'créé'} avec succès !`))
                 closePopup()
             } else {
                 throw new Error(`HTTP error! Status: ${res.status}`);
@@ -135,11 +138,12 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
                             onChange={handleChange}
                         >
                             <option value="">- - Choisir une catégorie - -</option>
-                            {field.options.map((option, index) => (
-                                <option key={index} value={option}>
-                                    {option}
+                            {field.options && Array.isArray(field.options) && field.options.map((option, index) => (
+                                <option key={option.id || index} value={option.typeName}>
+                                    {option.typeName}
                                 </option>
                             ))}
+                            
                         </select>
                     ) : (
                         <input

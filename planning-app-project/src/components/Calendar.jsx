@@ -20,6 +20,8 @@ function Calendar() {
   const [events, setEvents] = useState([])   // State to store events
   const [selectedDayEvents, setSelectedDayEvents] = useState([]);   // Store the events of the selected day
 
+  const [types, setTypes] = useState([])
+
   
 
   // Fetch to then be able to display the data   // I moved the fetch from Grid to here (Calendar) to be able to use the data in Popup in addition to Grid
@@ -39,6 +41,29 @@ function Calendar() {
     }
     fetchEvents()
   }, [currentMonth, currentYear]);                  // Call the API every time the month or year changes
+
+
+  const fetchTypes = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/types')
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      const data = await res.json()
+      // setTypes(data)
+      if (Array.isArray(data)) {
+        setTypes(data);
+    } else {
+        console.error("Les types récupérés ne sont pas un tableau.");
+    }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des types :', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchTypes()
+  }, [])
 
 
 
@@ -112,6 +137,8 @@ function Calendar() {
           setCurrentYear = {setCurrentYear}
           events = {selectedDayEvents}      // Pass the events of the selected day
           fetchEvents = {fetchEvents}       // Refreshment after fetches
+          // fetchTypes = {fetchTypes}
+          types = {types}
         />
       )}
     </div>
