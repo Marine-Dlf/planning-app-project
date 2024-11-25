@@ -24,21 +24,23 @@ function Calendar() {
 
   
 
-  // Fetch to then be able to display the data   // I moved the fetch from Grid to here (Calendar) to be able to use the data in Popup in addition to Grid
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
+  // Refreshment after fetches
+  const fetchEvents = async () => {
+    try {
         const response = await fetch('http://localhost:5000/events');
         if (!response.ok) {
-          // Check if the response is OK (status 200-299) (if not, it throws an error)
-          throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();         // If the response is correct, we extract the JSON data from the response
         setEvents(data);                            // Store events in state
-      } catch (error) {
+        // closePopup()
+    } catch (error) {
         console.error('Erreur lors de la récupération des événements :', error);
-      }
     }
+  };
+
+  // Fetch to then be able to display the data   // I moved the fetch from Grid to here (Calendar) to be able to use the data in Popup in addition to Grid
+  useEffect(() => {
     fetchEvents()
   }, [currentMonth, currentYear]);                  // Call the API every time the month or year changes
 
@@ -85,23 +87,6 @@ function Calendar() {
   }
 
 
-  // Refreshment after fetches
-  const fetchEvents = async () => {
-    try {
-        const response = await fetch('http://localhost:5000/events');
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setEvents(data);
-        closePopup()
-    } catch (error) {
-        console.error('Erreur lors de la récupération des événements :', error);
-    }
-  };
-
-
-
   return (
     <div>
       <CurrentDate 
@@ -138,7 +123,6 @@ function Calendar() {
           setCurrentYear = {setCurrentYear}
           events = {selectedDayEvents}      // Pass the events of the selected day
           fetchEvents = {fetchEvents}       // Refreshment after fetches
-          // fetchTypes = {fetchTypes}
           types = {types}
         />
       )}
