@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Day({ day, onClick, events }) {
+function Day({ day, onClick, events, types }) {
   return (
     <div
       className={'day' + (day === "" ? " emptyCase" : "")}
@@ -18,6 +18,10 @@ function Day({ day, onClick, events }) {
             return timeA.localeCompare(timeB)
           })
           .map((event, index) => {
+            // Find the 'typeName' corresponding to the 'type_id' or other field
+            const type = types.find(type => type.id === event.types_id);
+            const typeName = type ? type.typeName : "Type inconnu";
+            
             // Formatting `time` to exclude seconds
             let formattedTime
             if (event.time !== null) {
@@ -40,6 +44,8 @@ function Day({ day, onClick, events }) {
                       ? `${formattedTime} - ${event.location}`
                       : formattedTime || event.location || null}
                   </div>
+
+                  {typeName}
 
                 </div>
               )

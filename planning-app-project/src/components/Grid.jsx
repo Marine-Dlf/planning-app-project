@@ -3,7 +3,7 @@ import '../styles/components/grid.scss'
 import Day from './Day';
 
 
-function Grid({ currentMonth, currentYear, displayPopup, events }) {
+function Grid({ currentMonth, currentYear, displayPopup, events, types }) {
 
   const [grid, setGrid] = useState([]);      // Generates a table of the days of the month
 
@@ -57,6 +57,7 @@ function Grid({ currentMonth, currentYear, displayPopup, events }) {
       day = {day}             // Pass the day or empty box to the Day component
       events = {dayEvents}    // Pass today's events to the Day component
       onClick = {day ? () => displayPopup(popupType, day, dayEvents) : undefined}     // Passes the click action to the Day component (the 'day' type has been replaced by popupType)
+      types={types}
     />
     )
   })

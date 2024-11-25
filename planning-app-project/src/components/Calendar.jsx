@@ -125,6 +125,7 @@ function Calendar() {
         setCurrentYear = {setCurrentYear}
         displayPopup = {displayPopup}
         events = {events}
+        types={types}
       />
 
       {isPopupOpen && (
