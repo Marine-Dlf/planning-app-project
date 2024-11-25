@@ -209,6 +209,8 @@
                 .modifyButton, .deleteButton {
                     border: solid rgb(249, 212, 218);
                     background-color: rgb(249, 212, 218);
+                    padding-bottom: 0.3rem;
+                    border-radius: 5px;
                     cursor: pointer;
                     transition: transform 0.3 ease;
 
@@ -220,14 +222,22 @@
 
             .eventName {
                 padding: 4px 0;
-                border-bottom: solid pink;
+                // border-bottom: solid pink;
+                border-bottom: solid white;
             }
             .time {
                 font-weight: bold;
             }
 
+            .typeName {
+                border-bottom: solid white;
+                padding: 4px 0;
+                font-style: italic;
+            }
+
             .location {
-                border-bottom: solid pink;
+                // border-bottom: solid pink;
+                border-bottom: solid white;
                 padding: 4px 0;
             }
 

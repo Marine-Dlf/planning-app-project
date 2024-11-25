@@ -103,13 +103,29 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                                 // Find the 'typeName' corresponding to the 'type_id' or other field
                                 const type = types.find(type => type.id === event.types_id);
                                 const typeName = type ? type.typeName : "Type inconnu";
+                                console.log(typeName)
+                                const checkColor = (typeName) => {
+                                    switch (typeName) {
+                                        case "Concours":
+                                            return "#88C4FF";
+                                        case "Spectacle":
+                                            return "#9AFF7F";
+                                        case "Répétition":
+                                            return "#FFF4A1";
+                                        case "Réunion":
+                                            return "#FFA3CC";
+                                        case "Autre":
+                                            return "rgb(249, 212, 218)"
+                                        default:
+                                    }
+                                }
 
                                 return (
-                                    <li key={index} className='item'>
+                                    <li key={index} className='item' style={{ backgroundColor: `${checkColor(typeName)}` }}>
                                         
-                                        <div className='buttons'>
-                                            <button className='modifyButton' onClick={() => openEditForm(event)}>✏️</button>
-                                            <button className='deleteButton' onClick={() => deleteEvent(event.id, event.eventName)}>🗑️</button>
+                                        <div className='buttons' >
+                                            <button className='modifyButton' style={{ border: `${checkColor(typeName)}`, backgroundColor: `${checkColor(typeName)}` }} onClick={() => openEditForm(event)}>✏️</button>
+                                            <button className='deleteButton' style={{ border: `${checkColor(typeName)}`, backgroundColor: `${checkColor(typeName)}` }} onClick={() => deleteEvent(event.id, event.eventName)}>🗑️</button>
                                         </div>
 
                                         <div className='eventInfos'>
@@ -119,9 +135,9 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
                                             <div className='eventName'><strong>{event.eventName}</strong></div>
 
-                                            {event.location ? <div className='location'>{event.location}</div> : null}
+                                            <div className='typeName'>{typeName}</div>
 
-                                            {typeName}
+                                            {event.location ? <div className='location'>{event.location}</div> : null}
 
                                             <div className='comment'>
                                                 {event.comment

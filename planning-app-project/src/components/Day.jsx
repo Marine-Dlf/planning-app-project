@@ -21,7 +21,22 @@ function Day({ day, onClick, events, types }) {
             // Find the 'typeName' corresponding to the 'type_id' or other field
             const type = types.find(type => type.id === event.types_id);
             const typeName = type ? type.typeName : "Type inconnu";
-            
+            const checkColor = (typeName) => {
+              switch (typeName) {
+                  case "Concours":
+                      return "#88C4FF";
+                  case "Spectacle":
+                      return "#9AFF7F";
+                  case "Répétition":
+                      return "#FFF4A1"
+                  case "Réunion":
+                      return "#FFA3CC"
+                  case "Autre":
+                      return "rgb(254, 224, 228)"
+                  default:
+              }
+          }
+
             // Formatting `time` to exclude seconds
             let formattedTime
             if (event.time !== null) {
@@ -34,7 +49,7 @@ function Day({ day, onClick, events, types }) {
             }
 
               return (
-                <div key={index} className='event'>
+                <div key={index} className='event' style={{ backgroundColor: `${checkColor(typeName)}` }}>
 
                   {event.eventName}<br/>
 
@@ -44,8 +59,6 @@ function Day({ day, onClick, events, types }) {
                       ? `${formattedTime} - ${event.location}`
                       : formattedTime || event.location || null}
                   </div>
-
-                  {typeName}
 
                 </div>
               )
