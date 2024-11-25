@@ -31,8 +31,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
 
 
     const formfields = [
-        // { label: "Catégorie", type: "select", name: "typeName", options: ["Spectacle", "Concours", "Répétition", "Réunion", "Autre"] },
-        { label: "Catégorie", type: "select", name: "typeName", options: types },
+        { label: "Catégorie", type: "select", name: "types_id", options: types },
         { label: "Evènement", type: "text", name: "eventName"},
         { label: "Horaire", type: "time", name: "time"},
         { label: "Lieu", type: "text", name: "location"},
@@ -43,7 +42,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
     useEffect(() => {
         if (isEditMode && eventSelected) {
             setFormData({
-                typeName: eventSelected.typeName || '',
+                types_id: eventSelected.types_id || '',
                 eventName: eventSelected.eventName || '',
                 time: eventSelected.time || '',
                 location: eventSelected.location || '',
@@ -68,13 +67,13 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
     // Detects form submission
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        console.log("Données envoyées:", formData);
         const method = isEditMode ? 'PUT' : 'POST'
         const url = isEditMode ? `http://localhost:5000/events/${eventSelected.id}` : 'http://localhost:5000/events'
 
         // Checks if eventName is valid (not empty)
-        if (formData.eventName.trim() === '' || !formData.typeName) {
-            alert('Evènement obligatoire')
+        if (formData.eventName.trim() === '' || !formData.types_id) {
+            alert("Merci de renseigner la catégorie et le nom de l'évènement")
             return
         }
 
@@ -94,10 +93,8 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
             });
 
             if (res.ok) {
-                await fetchEvents();    // Refresh events after adding
+                await fetchEvents();                                // Refresh events after adding
                 console.log(`Evènement ${isEditMode ? 'modifié' : 'créé'} avec succès !`)
-                // await fetchTypes();
-                // console.log((`Type ${isEditMode ? 'modifié' : 'créé'} avec succès !`))
                 closePopup()
             } else {
                 throw new Error(`HTTP error! Status: ${res.status}`);
@@ -139,7 +136,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
                         >
                             <option value="">- - Choisir une catégorie - -</option>
                             {field.options && Array.isArray(field.options) && field.options.map((option, index) => (
-                                <option key={option.id || index} value={option.typeName}>
+                                <option key={option.id || index} value={option.id}>
                                     {option.typeName}
                                 </option>
                             ))}
