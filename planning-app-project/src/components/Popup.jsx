@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../styles/components/popup.scss'
 import Form from './Form';
 import EventsList from './EventsList';
+import TodaysDateDisplay from './TodaysDateDisplay';
 
 function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, fetchEvents, types }) {
 
@@ -68,16 +69,12 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
     let content;
 
     if (type === 'dayWithEvent') {
-        const date = new Date(currentYear, currentMonth, day);
-        const dayOfWeek = date.toLocaleDateString('fr-FR', { weekday: 'long' });
-        const dayOfWeekCapital = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1);
-        const nameOfMonth = date.toLocaleDateString('fr-FR', { month: 'long' })
 
         content = (
             <div>
                 {isFormOpen ? (
                     <>
-                        <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
+                        <TodaysDateDisplay day={day} currentMonth={currentMonth} currentYear={currentYear} />
                         <Form 
                             fetchEvents={fetchEvents}
                             types={types}
@@ -89,7 +86,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                     </>
                 ) : (
                     <div className='listEvents'>
-                        <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
+                        <TodaysDateDisplay day={day} currentMonth={currentMonth} currentYear={currentYear} />
                         <p>Evènement(s)</p>
 
                         {events.length > 0 ? (
@@ -107,12 +104,9 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
 
     } else if (type === 'dayWithoutEvent') {
         const date = new Date(currentYear, currentMonth, day);
-        const dayOfWeek = date.toLocaleDateString('fr-FR', { weekday: 'long' });
-        const dayOfWeekCapital = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1);
-        const nameOfMonth = date.toLocaleDateString('fr-FR', { month: 'long' });
 
         content = <div>
-             <p className='todaysDate'>{dayOfWeekCapital} {day} {nameOfMonth} {currentYear}</p>
+             <TodaysDateDisplay day={day} currentMonth={currentMonth} currentYear={currentYear} />
              <Form fetchEvents={fetchEvents} closePopup= {closePopup} selectedDate={date} types={types} />
          </div>
       
