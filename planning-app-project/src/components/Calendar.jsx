@@ -87,6 +87,13 @@ function Calendar() {
   }
 
 
+  const showAllEvents = () => {
+    setPopupType('allEvents'); // On change le type de popup
+    setIsPopupOpen(true); // On ouvre la popup
+};
+
+
+
   return (
     <div>
       <CurrentDate 
@@ -94,6 +101,9 @@ function Calendar() {
         setTodayDate = {setTodayDate}
         setCurrentMonth = {setCurrentMonth}
         setCurrentYear = {setCurrentYear}
+        isPopupOpen={isPopupOpen}
+        setIsPopupOpen={setIsPopupOpen}
+        showAllEvents={showAllEvents}
       />
       <ChangeDate 
         currentMonth = {currentMonth}
@@ -124,6 +134,7 @@ function Calendar() {
           events = {selectedDayEvents}      // Pass the events of the selected day
           fetchEvents = {fetchEvents}       // Refreshment after fetches
           types = {types}
+          eventsArray = {events}
         />
       )}
     </div>

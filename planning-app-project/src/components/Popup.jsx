@@ -3,9 +3,10 @@ import '../styles/components/popup.scss'
 import Form from './Form';
 import EventsList from './EventsList';
 import TodaysDateDisplay from './TodaysDateDisplay';
+import EventsListDisplay from './EventsListDisplay';
 
 
-function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, fetchEvents, types }) {
+function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, fetchEvents, types, eventsArray }) {
 
     const monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
@@ -121,6 +122,20 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
             <button onClick={() => handleYearClick(currentYear + 1)}>{currentYear + 1}</button>
             <button onClick={() => handleYearClick(currentYear + 2)}>{currentYear + 2}</button>
         </div>
+
+    } else if (type === 'allEvents') {
+        const sortedEvents = [...eventsArray].sort((a, b) => new Date(a.date) - new Date(b.date));
+        console.log(eventsArray)
+        content = (
+            <div className='allEventsList'>
+                <h2>Liste des évènements</h2>
+                {eventsArray.length > 0 ? (
+                    <EventsListDisplay eventsArray={sortedEvents} types={types} />
+                ) : (
+                    <p>Aucun évènement enregistré</p>
+                )}
+            </div>
+        )
     }
       
 
