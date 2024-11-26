@@ -1,4 +1,6 @@
 import React from 'react'
+import { checkColor } from '../utils/checkColor';
+
 
 function EventsList({ events, types, openEditForm, deleteEvent }) {
 
@@ -16,21 +18,6 @@ function EventsList({ events, types, openEditForm, deleteEvent }) {
                 const type = types.find(type => type.id === event.types_id);
                 const typeName = type ? type.typeName : "Type inconnu";
                 console.log(typeName)
-                const checkColor = (typeName) => {
-                    switch (typeName) {
-                        case "Concours":
-                            return "#88C4FF";
-                        case "Spectacle":
-                            return "#9AFF7F";
-                        case "Répétition":
-                            return "#FFF4A1";
-                        case "Réunion":
-                            return "#FFA3CC";
-                        case "Autre":
-                            return "rgb(249, 212, 218)"
-                        default:
-                    }
-                }
 
                 return (
                     <li key={index} className='item' style={{ backgroundColor: `${checkColor(typeName)}` }}>

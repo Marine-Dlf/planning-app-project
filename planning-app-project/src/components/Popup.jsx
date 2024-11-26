@@ -4,6 +4,7 @@ import Form from './Form';
 import EventsList from './EventsList';
 import TodaysDateDisplay from './TodaysDateDisplay';
 
+
 function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, fetchEvents, types }) {
 
     const monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
@@ -41,7 +42,6 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         setEventSelected(null)
         setIsEditMode(false)
     }
-
 
 
     // Deleting an event
