@@ -12,7 +12,6 @@
 }
 
 .popup {
-    // width: 300px;
     // height: 400px;
     background-color: white;
     padding: 20px;
@@ -197,7 +196,6 @@
             margin: 12px 0;
             align-self: center;
             border-radius: 5px;
-            background-color: rgb(249, 212, 218);
             display: flex;
             flex-direction: row-reverse;
             justify-content: space-between;
@@ -207,8 +205,6 @@
                 flex-direction: column;
 
                 .modifyButton, .deleteButton {
-                    border: solid rgb(249, 212, 218);
-                    background-color: rgb(249, 212, 218);
                     padding-bottom: 0.3rem;
                     border-radius: 5px;
                     cursor: pointer;
@@ -218,11 +214,35 @@
                         transform: scale(1.15);
                     }
                 }
+
+                .modifyButton.Concours, .deleteButton.Concours {
+                    background-color: #88C4FF;
+                    border: solid #88C4FF;
+                }
+
+                .modifyButton.Spectacle, .deleteButton.Spectacle {
+                    background-color: #9AFF7F;
+                    border: solid #9AFF7F;
+                }
+
+                .modifyButton.Répétition, .deleteButton.Répétition {
+                    background-color: #FFF4A1;
+                    border: solid #FFF4A1;
+                }
+
+                .modifyButton.Réunion, .deleteButton.Réunion {
+                    background-color: #FFA3CC;
+                    border: solid #FFA3CC;
+                }
+
+                .modifyButton.Autre, .deleteButton.Autre {
+                    background-color: rgb(249, 212, 218);
+                    border: solid rgb(249, 212, 218);
+                }
             }
 
             .eventName {
                 padding: 4px 0;
-                // border-bottom: solid pink;
                 border-bottom: solid white;
             }
             .time {
@@ -236,7 +256,6 @@
             }
 
             .location {
-                // border-bottom: solid pink;
                 border-bottom: solid white;
                 padding: 4px 0;
             }
@@ -245,6 +264,26 @@
                 font-size: 0.95rem;
                 padding: 7px 0;
             }
+        }
+
+        .item.Concours {
+            background-color: #88C4FF;
+        }
+
+        .item.Spectacle {
+            background-color: #9AFF7F;
+        }
+
+        .item.Répétition {
+            background-color: #FFF4A1;
+        }
+
+        .item.Réunion {
+            background-color: #FFA3CC;
+        }
+
+        .item.Autre {
+            background-color: rgb(249, 212, 218);
         }
     }
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { checkColor } from '../utils/checkColor';
 
 
 function EventsList({ events, types, openEditForm, deleteEvent }) {
@@ -20,11 +19,11 @@ function EventsList({ events, types, openEditForm, deleteEvent }) {
                 console.log(typeName)
 
                 return (
-                    <li key={index} className='item' style={{ backgroundColor: `${checkColor(typeName)}` }}>
+                    <li key={index} className={`item ${typeName}`}>     {/*Color change depending on the type of event*/}
                         
                         <div className='buttons' >
-                            <button className='modifyButton' style={{ border: `${checkColor(typeName)}`, backgroundColor: `${checkColor(typeName)}` }} onClick={() => openEditForm(event)}>✏️</button>
-                            <button className='deleteButton' style={{ border: `${checkColor(typeName)}`, backgroundColor: `${checkColor(typeName)}` }} onClick={() => deleteEvent(event.id, event.eventName)}>🗑️</button>
+                            <button className={`modifyButton ${typeName}`} onClick={() => openEditForm(event)}>✏️</button>
+                            <button className={`deleteButton ${typeName}`} onClick={() => deleteEvent(event.id, event.eventName)}>🗑️</button>
                         </div>
 
                         <div className='eventInfos'>

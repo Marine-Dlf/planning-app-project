@@ -1,5 +1,4 @@
 import React from 'react'
-import { checkColor } from '../utils/checkColor';
 
 
 function Day({ day, onClick, events, types }) {
@@ -36,7 +35,7 @@ function Day({ day, onClick, events, types }) {
             }
 
               return (
-                <div key={index} className='event' style={{ backgroundColor: `${checkColor(typeName)}` }}>
+                <div key={index} className={`event ${typeName}`}>           {/*Color change depending on the type of event*/}
 
                   {event.eventName}<br/>
 

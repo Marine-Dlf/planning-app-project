@@ -36,7 +36,7 @@
     color: rgb(56, 56, 121);
     border: solid #f9f9f9;
     width: 95%;
-    background-color: rgb(254, 224, 228);
+    // background-color: rgb(254, 224, 228);
     border-radius: 5px;
     padding: 5px;
 
@@ -44,6 +44,26 @@
         font-size: 0.9rem;
         font-weight: 600;
     }
+}
+
+.event.Concours {
+    background-color: #88C4FF;
+}
+
+.event.Spectacle {
+    background-color: #9AFF7F;
+}
+
+.event.Répétition {
+    background-color: #FFF4A1;
+}
+
+.event.Réunion {
+    background-color: #FFA3CC;
+}
+
+.event.Autre {
+    background-color: rgb(254, 224, 228);
 }
 
 .number {
