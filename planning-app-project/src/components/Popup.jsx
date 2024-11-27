@@ -126,11 +126,11 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
     } else if (type === 'allEvents') {
         const sortedEvents = [...eventsArray].sort((a, b) => new Date(a.date) - new Date(b.date));
         console.log(eventsArray)
+        console.log(sortedEvents)
         content = (
             <div className='allEventsList'>
-                <h2>Liste des évènements</h2>
                 {eventsArray.length > 0 ? (
-                    <EventsListDisplay eventsArray={sortedEvents} types={types} />
+                    <EventsListDisplay sortedEvents={sortedEvents} types={types} />
                 ) : (
                     <p>Aucun évènement enregistré</p>
                 )}

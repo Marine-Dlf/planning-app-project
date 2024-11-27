@@ -1,0 +1,48 @@
+h3 {
+    text-align: center;
+}
+
+.listItem {
+    width: 93%;
+    height: 500px;
+    margin: 0;
+    padding: 0 8px;
+    background-color: rgb(252, 240, 241);
+    border: solid rgb(251, 236, 238);
+    border-radius: 5px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+
+    .item {
+        list-style-type: none;
+        width: auto;
+        padding: 8px;
+        margin: 12px 0;
+        align-self: center;
+        border-radius: 5px;
+
+        p {
+            margin: 0.5rem;
+        }
+    }
+
+    .item.Concours {
+        background-color: #88C4FF;
+    }
+
+    .item.Spectacle {
+        background-color: #9AFF7F;
+    }
+
+    .item.Répétition {
+        background-color: #FFF4A1;
+    }
+
+    .item.Réunion {
+        background-color: #FFA3CC;
+    }
+
+    .item.Autre {
+        background-color: rgb(249, 212, 218);
+    }
+}
