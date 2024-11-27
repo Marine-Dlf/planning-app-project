@@ -124,9 +124,18 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         </div>
 
     } else if (type === 'allEvents') {
-        const sortedEvents = [...eventsArray].sort((a, b) => new Date(a.date) - new Date(b.date));
-        console.log(eventsArray)
-        console.log(sortedEvents)
+        
+        // Display in chronological order (and if several events on the same date display in time order)
+        const sortedEvents = [...eventsArray].sort((a, b) => {
+            const dateComparison = new Date(a.date) - new Date(b.date);
+            if (dateComparison !== 0) {
+                return dateComparison;                // If the dates are different, we sort them by date.
+            }
+            const timeA = a.time || "";
+            const timeB = b.time || "";
+            return timeA.localeCompare(timeB);        // Otherwise, we sort by time
+        });
+        
         content = (
             <div className='allEventsList'>
                 {eventsArray.length > 0 ? (
