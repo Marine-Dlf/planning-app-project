@@ -17,10 +17,15 @@ function EventsListDisplay({ sortedEvents, types }) {
 
                     const formattedDate = new Intl.DateTimeFormat('fr-FR').format(new Date(sortedEvent.date));
 
+                    const dayOfWeek = new Date(sortedEvent.date).toLocaleDateString('fr-FR', { weekday: 'long' });
+
+
                     return (
                         <li key={index} className={`item ${typeName}`}>
-                            <p className='date'>{formattedDate}</p>
-                            <p className='time'>{sortedEvent.time}</p>
+                            <p className='date'><strong>{formattedDate}</strong> ({dayOfWeek}) </p>
+                            {sortedEvent.time ? (
+                                <p className='time'>{new Date(`1970-01-01T${sortedEvent.time}`).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</p>
+                            ) : null}
                             <p className='eventName'>{sortedEvent.eventName}</p>
                         </li>
                     )
