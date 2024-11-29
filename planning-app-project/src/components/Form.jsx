@@ -13,8 +13,6 @@ const EMPTY_EVENT = {
 
 function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode, types }) {
 
-    // // const [formData, setFormData] = useState(EMPTY_EVENT);
-
     // Allows dates to be stored in a standardized YYYY-MM-DD format, compatible with many databases and API conventions
       const formatDate = (date) => {
         const year = date.getFullYear();
@@ -42,6 +40,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
     useEffect(() => {
         if (isEditMode && eventSelected) {
             setFormData({
+                date: eventSelected.date,
                 types_id: eventSelected.types_id || '',
                 eventName: eventSelected.eventName || '',
                 time: eventSelected.time || '',
@@ -112,17 +111,28 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
       <form className='form' onSubmit={handleSubmit}>
 
         <div className='formStep'>
-
-            <div className='hidden'>
-            <label>Date</label>
-                <input
-                    type="text"
-                    name="date"
-                    value={formData.date || ''}
-                    readOnly   // Display the date in an unchangeable manner
-            />
-            </div>
-
+            {isEditMode ? (
+                <div>
+                <label>Date</label>
+                    <input
+                        type="text"
+                        name="date"
+                        value={formData.date || ''}
+                        onChange={handleChange}
+                />
+                </div>
+            ) : (
+                <div className='hidden'>
+                <label>Date</label>
+                    <input
+                        type="text"
+                        name="date"
+                        value={formData.date || ''}
+                        // readOnly   // Display the date in an unchangeable manner
+                />
+                </div>
+            )
+            }
 
             {formfields.map((field) => (
                 <div key={field.name} className='formStep'>
