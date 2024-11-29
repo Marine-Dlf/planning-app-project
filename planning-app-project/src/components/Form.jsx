@@ -22,10 +22,15 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
       };
     
 
-      const [formData, setFormData] = useState({
-        ...EMPTY_EVENT,
-        date: formatDate(selectedDate),  // Local format
-      });
+    const [formData, setFormData] = useState({
+    ...EMPTY_EVENT,
+    date: formatDate(selectedDate),  // Local format
+    });
+    
+    console.log (formData)
+    console.log(selectedDate)
+    console.log(typeof selectedDate)
+    console.log(eventSelected)
 
 
     const formfields = [
@@ -40,7 +45,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
     useEffect(() => {
         if (isEditMode && eventSelected) {
             setFormData({
-                date: eventSelected.date,
+                date: eventSelected.date.split("T")[0],
                 types_id: eventSelected.types_id || '',
                 eventName: eventSelected.eventName || '',
                 time: eventSelected.time || '',
@@ -58,7 +63,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
         // Utilise le name du champ pour mettre à jour la valeur correcte dans l'objet formData. Avec ...prevData, elle conserve toutes les autres propriétés de formData intactes, et met seulement à jour le champ qui a changé.
         setFormData((prevData) => ({        // Mise à jour de l'état formData. La fonction prend un callback (fonction de rappel) qui a accès à la version précédente de l'état, prevData (les anciennes valeurs des champs de formulaire)
             ...prevData,                    // Le spread operator (...) permet de copier toutes les propriétés de l'objet prevData dans le nouvel objet qui sera retourné. Cela signifie que tous les champs de formulaire précédemment définis dans l'état seront conservés tels qu'ils étaient
-            [name]: value,                  // Mise à jour uniquement du champ modifié
+            [name]: value,                  // Mise à jour uniquement du champ modifié (pour la date: conversion au format iso)
         }))
     }
 
@@ -128,7 +133,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
                         type="text"
                         name="date"
                         value={formData.date || ''}
-                        // readOnly   // Display the date in an unchangeable manner
+                        readOnly   // Display the date in an unchangeable manner
                 />
                 </div>
             )
