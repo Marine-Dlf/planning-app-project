@@ -14,17 +14,22 @@ const EMPTY_EVENT = {
 function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode, types }) {
 
     // Allows dates to be stored in a standardized YYYY-MM-DD format, compatible with many databases and API conventions
-      const formatDate = (date) => {
+    const formatDate = (date) => {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;       // Returns the format YYYY-MM-DD
-      };
+    };
     
       
     const convertToFrenchDate = (isoDate) => {
         const [year, month, day] = isoDate.split("-")
-        return `${day}/${month}/${year}`        // Transforms "yyyy-mm-dd" into "dd/mm/yyyy"
+        return `${day}/${month}/${year}`
+    }
+
+    const convertToIsoDate = (frenchDate) => {
+        const [day, month, year] = frenchDate.split("/")
+        return `${year}-${month}-${day}`
     }
 
 
@@ -40,6 +45,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
         { label: "Horaire", type: "time", name: "time"},
         { label: "Lieu", type: "text", name: "location"},
     ]
+
 
 
     // Pre-filling fields in form edit mode
@@ -68,10 +74,6 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
         }))
     }
 
-    const convertToIsoDate = (frenchDate) => {
-        const [day, month, year] = frenchDate.split("/")
-        return `${year}-${month}-${day}`
-    }
 
     // Detects form submission
     const handleSubmit = async (e) => {
@@ -113,7 +115,6 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
         } catch (error) {
             console.error("Erreur lors de l'enregistrement de l'événement :", error);
         }
-
     }
 
 
@@ -122,28 +123,16 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
       <form className='form' onSubmit={handleSubmit}>
 
         <div className='formStep'>
-            {isEditMode ? (
-                <div>
+                <div className={isEditMode ? "" : "hidden"}>
                 <label>Date</label>
                     <input
                         type="text"
                         name="date"
                         value={formData.date || ''}
                         onChange={handleChange}
-                />
+                        readOnly={!isEditMode}
+                    />
                 </div>
-            ) : (
-                <div className='hidden'>
-                <label>Date</label>
-                    <input
-                        type="text"
-                        name="date"
-                        value={formData.date || ''}
-                        readOnly   // Display the date in an unchangeable manner
-                />
-                </div>
-            )
-            }
 
             {formfields.map((field) => (
                 <div key={field.name} className='formStep'>
