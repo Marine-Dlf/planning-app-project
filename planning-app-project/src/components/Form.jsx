@@ -21,16 +21,17 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
         return `${year}-${month}-${day}`;       // Returns the format YYYY-MM-DD
       };
     
+      
+    const convertToFrenchDate = (isoDate) => {
+        const [year, month, day] = isoDate.split("-")
+        return `${day}/${month}/${year}`        // Transforms "yyyy-mm-dd" into "dd/mm/yyyy"
+    }
+
 
     const [formData, setFormData] = useState({
     ...EMPTY_EVENT,
-    date: formatDate(selectedDate),  // Local format
+    date: selectedDate ? convertToFrenchDate(formatDate(selectedDate)) : ""
     });
-    
-    console.log (formData)
-    console.log(selectedDate)
-    console.log(typeof selectedDate)
-    console.log(eventSelected)
 
 
     const formfields = [
@@ -45,7 +46,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
     useEffect(() => {
         if (isEditMode && eventSelected) {
             setFormData({
-                date: eventSelected.date.split("T")[0],
+                date: eventSelected.date ? convertToFrenchDate(eventSelected.date.split("T")[0]) : "",
                 types_id: eventSelected.types_id || '',
                 eventName: eventSelected.eventName || '',
                 time: eventSelected.time || '',
@@ -67,6 +68,10 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
         }))
     }
 
+    const convertToIsoDate = (frenchDate) => {
+        const [day, month, year] = frenchDate.split("/")
+        return `${year}-${month}-${day}`
+    }
 
     // Detects form submission
     const handleSubmit = async (e) => {
@@ -86,6 +91,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
             const formDataToSend = {
             ...formData,
             time: formData.time === '' ? null : formData.time,
+            date: convertToIsoDate(formData.date)
             }
 
             const res = await fetch(url, {

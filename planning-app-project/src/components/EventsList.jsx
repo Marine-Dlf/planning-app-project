@@ -16,7 +16,6 @@ function EventsList({ events, types, openEditForm, deleteEvent }) {
                 // Find the 'typeName' corresponding to the 'type_id' or other field
                 const type = types.find(type => type.id === event.types_id);
                 const typeName = type ? type.typeName : "Type inconnu";
-                console.log(typeName)
 
                 return (
                     <li key={index} className={`item ${typeName}`}>     {/*Color change depending on the type of event*/}
