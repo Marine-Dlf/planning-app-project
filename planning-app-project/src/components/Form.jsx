@@ -158,6 +158,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
                             name={field.name}
                             value={formData[field.name] || ''}
                             onChange={handleChange}
+                            maxLength={75}
                         />
                     )}
                 </div>
@@ -166,7 +167,7 @@ function Form({ closePopup, selectedDate, fetchEvents, eventSelected, isEditMode
 
         <div className='formStep'>
             <label>Commentaire</label>
-            <textarea name='comment' value={formData.comment} onChange={handleChange}/>
+            <textarea name='comment' value={formData.comment} onChange={handleChange} maxLength={500}/>
         </div>
 
         <div className='saveButton'>

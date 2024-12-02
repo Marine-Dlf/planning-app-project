@@ -67,6 +67,10 @@
     }
 }
 
+textarea {
+    overflow-wrap: break-word; /* Moderne et recommandé */
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -77,6 +81,7 @@
         padding-top: 1.5rem;
         color: rgb(44, 44, 96);
     }
+
 
     .saveButton {
         display: flex;
@@ -263,6 +268,10 @@
             .comment {
                 font-size: 0.95rem;
                 padding: 7px 0;
+            }
+
+            .eventName, .location, .comment {
+                overflow-wrap: anywhere; /* Permet au texte de se couper à n'importe quel endroit */
             }
         }
 
