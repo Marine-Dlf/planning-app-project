@@ -4,6 +4,7 @@ import ChangeDate from './ChangeDate'
 import WeekDays from './WeekDays'
 import Grid from './Grid'
 import Popup from './Popup'
+import FilterTypes from './FilterTypes'
 
 
 function Calendar() {
@@ -21,6 +22,7 @@ function Calendar() {
   const [selectedDayEvents, setSelectedDayEvents] = useState([]);   // Store the events of the selected day
 
   const [types, setTypes] = useState([])
+  const [selectedTypes, setSelectedTypes] = useState([])
 
   
 
@@ -52,9 +54,10 @@ function Calendar() {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
       const data = await res.json()
-      // setTypes(data)
+
       if (Array.isArray(data)) {
         setTypes(data);
+        setSelectedTypes(data.map((type) => type.id))     // decides if all checkboxes should be checked
     } else {
         console.error("Les types récupérés ne sont pas un tableau.");
     }
@@ -67,6 +70,10 @@ function Calendar() {
     fetchTypes()
   }, [])
 
+  // Filters events to keep only those whose type matches the selected types
+  const filteredEvents = events.filter((event) =>
+    selectedTypes.includes(event.types_id)        // Keep only events matching selected types
+  )
 
 
   // Popup display
@@ -93,7 +100,6 @@ function Calendar() {
 };
 
 
-
   return (
     <div>
       <CurrentDate 
@@ -104,6 +110,12 @@ function Calendar() {
         isPopupOpen={isPopupOpen}
         setIsPopupOpen={setIsPopupOpen}
         showAllEvents={showAllEvents}
+      />
+      <FilterTypes
+        events={events}
+        types={types}
+        selectedTypes={selectedTypes}
+        setSelectedTypes={setSelectedTypes}
       />
       <ChangeDate 
         currentMonth = {currentMonth}
@@ -119,8 +131,8 @@ function Calendar() {
         currentYear = {currentYear}
         setCurrentYear = {setCurrentYear}
         displayPopup = {displayPopup}
-        events = {events}
         types={types}
+        events={filteredEvents}
       />
 
       {isPopupOpen && (
