@@ -14,9 +14,10 @@ function FilterTypes({ types, selectedTypes, setSelectedTypes }) {
     }
 
     return (
+        <div className='container'>
         <ul className='filterList'>
             {types.map((type) => (
-                <li key={type.id}>
+                <li key={type.id} className='checkbox'>
                     <input
                         type="checkbox"
                         id={`type-${type.id}`}
@@ -27,6 +28,7 @@ function FilterTypes({ types, selectedTypes, setSelectedTypes }) {
                 </li>
             ))}
         </ul>
+        </div>
     )
 }
 

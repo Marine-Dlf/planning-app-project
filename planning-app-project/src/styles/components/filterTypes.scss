@@ -1,7 +1,53 @@
+.container {
+    display: flex;
+    justify-content: center; /* Centre la liste horizontalement */
+}
+
 .filterList {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: row; /* Les éléments restent sur une seule ligne */
+    justify-content: center; /* Centrage de la liste sur l'écran */
     list-style-type: none;
-    padding-top: 12px;
+    padding: 5px 3px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    gap: 75px;
+    border: 1px solid rgb(253, 237, 239);
+    border-radius: 5px;
+    background-color: rgb(255, 246, 247);
+
+        input[type=checkbox] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        border: 1.5px solid rgb(44, 44, 96);
+        border-radius: 50%;
+        height: 12px;
+        width: 12px;
+        background-color: white;
+        cursor: pointer;
+    
+        &:hover {
+            background-color: pink;
+        }
+    }
+    
+    input[type=checkbox]:checked {
+        background-color: rgb(141, 141, 196);
+    
+        &:hover {
+            background-color: pink;
+        }
+    }
+
+    label {
+        cursor: pointer;
+    }
+}
+
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
 }
