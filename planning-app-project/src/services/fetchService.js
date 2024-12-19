@@ -1,7 +1,7 @@
 
-export const fetchEvents = async () => {
+const fetchData = async (url) => {
     try {
-        const response = await fetch('http://localhost:5000/events');
+        const response = await fetch(url);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -20,19 +20,5 @@ export const fetchEvents = async () => {
 };
 
 
-export const fetchTypes = async () => {
-    try {
-        const res = await fetch('http://localhost:5000/types')
-
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        const data = await res.json()
-
-        return data
-
-    } catch (error) {
-      console.error('Erreur lors de la récupération des types :', error);
-      return []
-    }
-}
+export const fetchEvents = () => fetchData('http://localhost:5000/events');
+export const fetchTypes = () => fetchData('http://localhost:5000/types');

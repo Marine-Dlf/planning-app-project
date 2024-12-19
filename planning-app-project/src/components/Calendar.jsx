@@ -26,6 +26,8 @@ function Calendar() {
   const [selectedTypes, setSelectedTypes] = useState([])
 
 
+
+  // Loading events from API. Automatic update when month or year changes.
   const loadEvents = async () => {
     try {
       const data = await fetchEvents()
@@ -40,6 +42,9 @@ function Calendar() {
   }, [currentMonth, currentYear])
 
 
+  
+  // Loading types from the API. Updating the types (to store data) and selectedTypes (to manage the default selected types) states.
+  // The call is made once: when the component is mounted
   const loadTypes = async () => {
     try {
       const data = await fetchTypes()
@@ -57,6 +62,7 @@ function Calendar() {
   useEffect(() => {
     loadTypes()
   }, [])
+
 
 
   // Filters events to keep only those whose type matches the selected types
