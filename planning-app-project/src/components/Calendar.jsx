@@ -5,6 +5,7 @@ import WeekDays from './WeekDays'
 import Grid from './Grid'
 import Popup from './Popup'
 import FilterTypes from './FilterTypes'
+import { fetchEvents, fetchTypes } from '../services/fetchService'
 
 
 function Calendar() {
@@ -24,51 +25,39 @@ function Calendar() {
   const [types, setTypes] = useState([])
   const [selectedTypes, setSelectedTypes] = useState([])
 
+
+  const loadEvents = async () => {
+    try {
+      const data = await fetchEvents()
+      setEvents(data)
+    } catch (error) {
+      console.error('Erreur lors du chargement des événements :', error);
+    }
+  }
   
-
-  // Refreshment after fetches
-  const fetchEvents = async () => {
-    try {
-        const response = await fetch('http://localhost:5000/events');
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();         // If the response is correct, we extract the JSON data from the response
-        setEvents(data);                            // Store events in state
-        // closePopup()
-    } catch (error) {
-        console.error('Erreur lors de la récupération des événements :', error);
-    }
-  };
-
-  // Fetch to then be able to display the data   // I moved the fetch from Grid to here (Calendar) to be able to use the data in Popup in addition to Grid
   useEffect(() => {
-    fetchEvents()
-  }, [currentMonth, currentYear]);                  // Call the API every time the month or year changes
+    loadEvents()
+  }, [currentMonth, currentYear])
 
 
-  const fetchTypes = async () => {
+  const loadTypes = async () => {
     try {
-      const res = await fetch('http://localhost:5000/types')
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
-      const data = await res.json()
-
+      const data = await fetchTypes()
       if (Array.isArray(data)) {
-        setTypes(data);
-        setSelectedTypes(data.map((type) => type.id))     // decides if all checkboxes should be checked
-    } else {
-        console.error("Les types récupérés ne sont pas un tableau.");
-    }
+            setTypes(data);
+            setSelectedTypes(data.map((type) => type.id))     // decides if all checkboxes should be checked
+        } else {
+            console.error("Les types récupérés ne sont pas un tableau.");
+        }
     } catch (error) {
-      console.error('Erreur lors de la récupération des types :', error);
+      console.error('Erreur lors du chargement des événements :', error);
     }
   }
 
   useEffect(() => {
-    fetchTypes()
+    loadTypes()
   }, [])
+
 
   // Filters events to keep only those whose type matches the selected types
   const filteredEvents = events.filter((event) =>
@@ -86,7 +75,7 @@ function Calendar() {
     }
   }
 
-  // Fermeture de la popup
+
   const closePopup = () => {
     setIsPopupOpen(false)
     setSelectedDay(null)    // Resets the selected day if necessary
@@ -95,8 +84,8 @@ function Calendar() {
 
 
   const showAllEvents = () => {
-    setPopupType('allEvents'); // On change le type de popup
-    setIsPopupOpen(true); // On ouvre la popup
+    setPopupType('allEvents');  // Change the popup type
+    setIsPopupOpen(true);       // Open the popup
 };
 
 
@@ -137,14 +126,14 @@ function Calendar() {
 
       {isPopupOpen && (
         <Popup
-          type = {popupType}                // Pass the 'type' prop to Popup
-          day = {selectedDay}               // The selected day can be skipped if necessary
-          closePopup = {closePopup}         // Pass the function to close the popup
-          currentMonth = {currentMonth}     // Pass the current month
-          currentYear = {currentYear}       // Pass the current year
+          type = {popupType}
+          day = {selectedDay}
+          closePopup = {closePopup}
+          currentMonth = {currentMonth}
+          currentYear = {currentYear}
           setCurrentYear = {setCurrentYear}
           events = {selectedDayEvents}      // Pass the events of the selected day
-          fetchEvents = {fetchEvents}       // Refreshment after fetches
+          fetchEvents = {loadEvents}       // Refreshment after fetches
           types = {types}
           eventsArray = {events}
         />

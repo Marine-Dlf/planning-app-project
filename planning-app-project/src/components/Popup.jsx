@@ -18,8 +18,8 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
     }
 
   
-    const [isFormOpen, setIsFormOpen] = useState(false)         // Form Opening Management
-    const [isEditMode, setIsEditMode] = useState(false)         // Edit Mode Management
+    const [isFormOpen, setIsFormOpen] = useState(false)
+    const [isEditMode, setIsEditMode] = useState(false)
     const [eventSelected, setEventSelected] = useState(null)
 
 
@@ -82,7 +82,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
                             closePopup={closePopup}
                             selectedDate={new Date(currentYear, currentMonth, day)}
                             eventSelected={eventSelected}   // Passes the data of the selected event
-                            isEditMode={isEditMode}         // Specifies if we are in edit mode
+                            isEditMode={isEditMode}
                         />
                     </>
                 ) : (
@@ -129,7 +129,7 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
         const sortedEvents = [...eventsArray].sort((a, b) => {
             const dateComparison = new Date(a.date) - new Date(b.date);
             if (dateComparison !== 0) {
-                return dateComparison;                // If the dates are different, we sort them by date.
+                return dateComparison;                // If the dates are different, we sort them by date
             }
             const timeA = a.time || "";
             const timeB = b.time || "";

@@ -49,7 +49,7 @@ function Grid({ currentMonth, currentYear, displayPopup, events, types }) {
         new Date(event.date).getDate() === day                  // and the day of this event correspond to currentYear, currentMonth and day
     );
 
-    const popupType = dayEvents.length > 0 ? 'dayWithEvent' : 'dayWithoutEvent';    // Type of popup depending on the presence or absence of event(s)
+    const popupType = dayEvents.length > 0 ? 'dayWithEvent' : 'dayWithoutEvent';
 
     return (
     <Day

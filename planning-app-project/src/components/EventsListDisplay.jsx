@@ -10,7 +10,7 @@ function EventsListDisplay({ sortedEvents, types }) {
 
     // Find the index of the next event or today's event
     const currentDateTime = new Date();
-    const nextEventIndex = sortedEvents.findIndex(event => new Date(event.date) >= currentDateTime); // trouve l'index du premier événement dont la date est égale ou supérieure à la date et l'heure actuelles
+    const nextEventIndex = sortedEvents.findIndex(event => new Date(event.date) >= currentDateTime); // Find the index of the first event whose date is equal to or greater than the current date and time
 
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function EventsListDisplay({ sortedEvents, types }) {
     return (
         <div>
             <h3>Liste de vos évènements</h3>
-
+            
             <ul className='listItem' ref={listRef}>
                 
                 {sortedEvents.map((sortedEvent, index) => {
