@@ -22,3 +22,19 @@ const fetchData = async (url) => {
 
 export const fetchEvents = () => fetchData('http://localhost:5000/events');
 export const fetchTypes = () => fetchData('http://localhost:5000/types');
+
+
+export const deleteEventService = async (id) => {
+    try {
+        const res = await fetch(`http://localhost:5000/events/${id}`, {
+            method: 'DELETE',
+        })
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return true
+    } catch (error) {
+        console.error("Erreur lors de la suppression de l'événement :", error);
+        return false
+    }
+}

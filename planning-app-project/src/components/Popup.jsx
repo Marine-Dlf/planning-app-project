@@ -4,6 +4,7 @@ import Form from './Form';
 import EventsList from './EventsList';
 import TodaysDateDisplay from './TodaysDateDisplay';
 import EventsListDisplay from './EventsListDisplay';
+import { deleteEventService } from '../services/fetchService';
 
 
 function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopup, events, fetchEvents, types, eventsArray }) {
@@ -49,19 +50,13 @@ function Popup({ type, day, currentMonth, currentYear, setCurrentYear, closePopu
     const deleteEvent = async (id, eventNameSelected) => {
         const confirmDelete = window.confirm(`Souhaitez-vous vraiment supprimer l'évènement:\n"${eventNameSelected}" ?`)
         if (confirmDelete) {
-            try {
-                const res = await fetch(`http://localhost:5000/events/${id}`, {
-                    method: 'DELETE',
-                })
-                if (res.ok) {
-                    await fetchEvents()
-                    closePopup()
-                } else {
-                throw new Error(`HTTP error! Status: ${res.status}`);
-                }
-                console.log("Événement supprimé avec succès :");
-            } catch (error) {
-                console.error("Erreur lors de la suppression de l'événement :", error);
+            const suppr = await deleteEventService(id);
+            if (suppr) {
+                alert(`Evènement supprimé avec succès`)
+                fetchEvents()       // reload events (if deleted successfully)
+                closePopup()
+            } else {
+                alert(`Une erreur s'est produite lors de la suppression de l'évènement`)
             }
         }
     }
