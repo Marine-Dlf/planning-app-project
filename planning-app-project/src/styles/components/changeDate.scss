@@ -36,6 +36,8 @@
             color: rgb(44, 44, 96);
             padding-left: 0.5rem;
             padding-right: 0.5rem;
+            padding-top: 0.01rem;
+            padding-bottom: 0.01rem;
             transition: transform 0.1s ease;
 
             &:hover {
@@ -50,7 +52,7 @@
         justify-content: space-around;
         align-items: center;
         background-color: pink;
-        padding: 0.7rem;
+        padding: 0.3rem;
 
         button {
             font-weight: bold;

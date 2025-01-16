@@ -1,6 +1,26 @@
 .container {
     display: flex;
-    justify-content: center; /* Centre la liste horizontalement */
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center; /* Centre la liste horizontalement */
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    color: rgb(44, 44, 96);
+    padding: 0.6rem;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+
+    &:hover {
+        background-color: pink;
+    }
+
+    &:active {
+        color: #E00B6C;
+    }
 }
 
 .filterList {

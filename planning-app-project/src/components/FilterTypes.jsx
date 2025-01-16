@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/components/filterTypes.scss'
 
 
 function FilterTypes({ types, selectedTypes, setSelectedTypes }) {
+
+    const [showFilters, setShowFilters] = useState(false)
 
     // Add or remove a type
     const toggleType = (typeId) => {
@@ -15,19 +17,24 @@ function FilterTypes({ types, selectedTypes, setSelectedTypes }) {
 
     return (
         <div className='container'>
-        <ul className='filterList'>
-            {types.map((type) => (
-                <li key={type.id} className='checkbox'>
-                    <input
-                        type="checkbox"
-                        id={`type-${type.id}`}
-                        checked={selectedTypes.includes(type.id)}     // Check if the type box is selected
-                        onChange={() => toggleType(type.id)}          // Calls toggleType when clicked
-                    />
-                    <label htmlFor={`type-${type.id}`}>{type.typeName}</label>
-                </li>
-            ))}
-        </ul>
+            
+            <button onClick={() => setShowFilters(!showFilters)}>Filtres</button>
+
+            {showFilters && (
+                <ul className='filterList'>
+                    {types.map((type) => (
+                        <li key={type.id} className='checkbox'>
+                            <input
+                                type="checkbox"
+                                id={`type-${type.id}`}
+                                checked={selectedTypes.includes(type.id)}     // Check if the type box is selected
+                                onChange={() => toggleType(type.id)}          // Calls toggleType when clicked
+                            />
+                            <label htmlFor={`type-${type.id}`}>{type.typeName}</label>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     )
 }
