@@ -39,8 +39,14 @@ function Grid({ currentMonth, currentYear, displayPopup, events, types }) {
   }, [currentYear, currentMonth])   // [currentYear, currentMonth], indicates that this effect should re-run every time currentYear or currentMonth changes
 
 
+
+  const today = new Date()
+  const currentDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+
   // Browse the array
   const browseGrid = () => grid.map((day, index) => {
+
+    const isPastDay = day && new Date(currentYear, currentMonth, day) < currentDate   //Checks if the day has passed relative to today's date
 
     const dayEvents = events.filter(                            // Filter events to get only those that match to the current day
       (event) =>                                                // then, event.date is converted to Date
@@ -51,6 +57,8 @@ function Grid({ currentMonth, currentYear, displayPopup, events, types }) {
 
     const popupType = dayEvents.length > 0 ? 'dayWithEvent' : 'dayWithoutEvent';
 
+
+
     return (
     <Day
       key = {index}
@@ -58,6 +66,7 @@ function Grid({ currentMonth, currentYear, displayPopup, events, types }) {
       events = {dayEvents}    // Pass today's events to the Day component
       onClick = {day ? () => displayPopup(popupType, day, dayEvents) : undefined}     // Passes the click action to the Day component (the 'day' type has been replaced by popupType)
       types={types}
+      isPastDay = {isPastDay}
     />
     )
   })

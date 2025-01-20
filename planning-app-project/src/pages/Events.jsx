@@ -5,6 +5,7 @@ import '../styles/pages/events.scss'
 
 
 function Events() {
+
   return (
     <div>
         <Header />

@@ -7,14 +7,16 @@ import Connexion from "./pages/Connexion";
 import Regristration from "./pages/Regristration";
 import './styles/pages/app.scss'
 
+
 function App() {
+
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/planning" element={<Planning />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="/events" element={<Events/>} />
           <Route path="/connexion" element={<Connexion />} />
           <Route path="/registration" element={<Regristration />} />
           <Route path="/*" element={<Home />} />

@@ -67,6 +67,12 @@
     background-color: rgb(254, 224, 228);
 }
 
+.pastEvent {
+    background-color: #d3d3d3;  // Grise le fond de l'événement
+    color: #a9a9a9;             // Grise le texte
+    pointer-events: none;         // Désactive l'interaction avec l'événement
+}
+
 .number {
     margin-bottom: 0.3rem;
     margin-top: 0.3rem;
@@ -76,3 +82,8 @@
     overflow-wrap: break-word;
     text-overflow: ellipsis;
 }
+
+.pastDay {
+    background-color: #e6e5e5; /* Gris clair pour les cases passées */
+    color: #a9a9a9; /* Couleur du texte plus claire */
+  }

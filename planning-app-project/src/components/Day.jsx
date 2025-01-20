@@ -1,10 +1,21 @@
 import React from 'react'
+import '../styles/components/grid.scss'
 
 
-function Day({ day, onClick, events, types }) {
+function Day({ day, onClick, events, types, isPastDay }) {
+
+  const isEventPast = (eventDate) => {
+    const today = new Date()
+    const eventsDate = new Date(eventDate)
+    if(eventsDate.getFullYear() === today.getFullYear() && eventsDate.getMonth() === today.getMonth() && eventsDate.getDate() === today.getDate()) {
+      return false
+    }
+    return eventsDate < today
+  }
+
   return (
     <div
-      className={'day' + (day === "" ? " emptyCase" : "")}
+      className={`day ${day === "" ? "emptyCase" : ""} ${isPastDay ? "pastDay" : ""}`}
       onClick={onClick}
     >
     
@@ -34,8 +45,10 @@ function Day({ day, onClick, events, types }) {
               formattedTime = ''
             }
 
+            const eventClass = isEventPast(event.date) ? 'pastEvent' : ''
+
               return (
-                <div key={index} className={`event ${typeName}`}>           {/*Color change depending on the type of event*/}
+                <div key={index} className={`event ${typeName} ${eventClass}`}>           {/*Color change depending on the type of event*/}
 
                   {event.eventName}<br/>
 
